@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.genvlin.gui.plot
+OpenIDE-Module-Install: de/genvlin/gui/plot/Installer.class
+OpenIDE-Module-Layer: de/genvlin/gui/plot/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/genvlin/gui/plot/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

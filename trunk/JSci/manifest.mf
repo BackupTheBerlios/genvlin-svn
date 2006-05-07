@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.genvlin.plugins.jsci
+OpenIDE-Module-Install: de/genvlin/plugins/jsci/Installer.class
+OpenIDE-Module-Localizing-Bundle: de/genvlin/plugins/jsci/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

@@ -1,0 +1,31 @@
+import de.genvlin.core.data.IntID;
+import de.genvlin.core.data.MainPool;
+import de.genvlin.core.data.VectorInterface;
+import de.genvlin.core.data.XYInterface;
+import de.genvlin.core.data.XYPool;
+import de.genvlin.core.plugin.PluginPool;
+import de.genvlin.core.math.*;
+import de.genvlin.gui.plot.*;
+import de.genvlin.core.util.*;
+
+public void regression(int idX, int idY) {
+        Object oX = obj(idX);
+        Object oY = obj(idY);
+        
+        if(oX instanceof VectorInterface && oY instanceof VectorInterface) {
+            VectorInterface y = (VectorInterface)oY;
+            VectorInterface x = (VectorInterface)oX;
+            
+            XYPool xyPool = (XYPool)MainPool.getDefault().create(XYPool.class);
+            XYInterface interfac = xyPool.add(x, y);
+            //xyPool.add(PluginPool.getDefault().getFitEngine().fit(interfac));
+
+	    LinearFunction lf = (LinearFunction)MainPool.getDefault().create(LinearFunction.class);
+            lf.setM(0.064818);
+	    lf.setN(-0.8);
+            lf.setRange(0,0,500,100);
+		xyPool.add(lf);
+	    panel = new GPlotPanel(xyPool);
+	    PluginPool.getDefault().getPlatform().showPanel(panel, "east");
+        }
+}

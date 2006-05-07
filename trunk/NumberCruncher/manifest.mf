@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.genvlin.plugins.numbercruncher
+OpenIDE-Module-Install: de/genvlin/plugins/numbercruncher/Installer.class
+OpenIDE-Module-Layer: de/genvlin/plugins/numbercruncher/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/genvlin/plugins/numbercruncher/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

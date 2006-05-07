@@ -1,0 +1,21 @@
+    /**
+     * This method calculates: n!/(n-m)!
+     * I you want n!, try factorial(n,n);     
+     * @returns the result or 1 if m>n.
+     */
+    public long factorial(long n, long m) 
+            throws Exception {
+        long res = 1;
+        if(m<=0) throw new Exception("InvalidArgument! It should be m>0!");
+        if(m>n) throw new Exception("InvalidArgument! It should be m<=n!");
+        
+        long start = n-m+1;
+
+        // 0! == 1
+        //if(start==0) start++;
+        
+        for(long i = start; i<= n ; i++)
+            res *= i;
+        
+        return res;
+    }

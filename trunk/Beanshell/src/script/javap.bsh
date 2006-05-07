@@ -1,0 +1,145 @@
+import bsh.ClassIdentifier;
+import java.lang.reflect.Modifier;
+ 
+//public void 
+javap(Object o)
+{
+    javap(o, 0, true);
+}
+
+/** with intGate you can specify which modifiers the method or the fields should
+ * have
+ */
+
+//public void
+javap(Object o, int intGate, boolean displayAll)
+{
+    print("Print all with following modifiers:"+modifiersToString(intGate));
+    print("Display all modifiers:"+displayAll);
+
+
+	Class clas;
+	if (o instanceof ClassIdentifier)
+	{   clas = this.caller.namespace.identifierToClass(o);
+        }
+        /* this is not useful for namecomletion:
+        else if(o instanceof String)
+	{
+            if(o.length() < 1) 
+            {   error("javap: Empty class name.");
+            	return;
+            }
+            clas = this.caller.namespace.getClass((String)o);
+	}
+        */
+        //e.g. object.getClass(); are already "class"es
+        else if(o instanceof Class) clas = o;
+        //all other objects
+	else clas = o.getClass();
+        
+	print(clas+" extends " + clas.getSuperclass());
+
+	this.dmethods = clas.getDeclaredMethods();
+	print("\n------------- Methods ----------------");
+	for(int i=0; i<dmethods.length; i++) 
+	{
+            this.m = dmethods[i];
+            if(modifiersPassingGate(m.getModifiers(), intGate))
+                print( getMethod(m, displayAll));
+	}
+
+	print("\n------------- Fields ----------------");
+	this.fields=clas.getDeclaredFields();
+	for(int i=0; i<fields.length; i++) 
+        {
+            this.f = fields[i];
+            if(modifiersPassingGate(f.getModifiers(), intGate))
+                 print( getField(f, displayAll) );
+	}
+}
+
+/** With modifier flags you specify, which attributes toCheckVar should have!
+ * If it is not important which modifier toCheckVar should have, 
+ * then modifierFlags =0 is right!
+ */
+public boolean modifiersPassingGate(int toCheckVar, int modifierFlags)
+{
+    //does modifier contain public attribute? 
+    //then toCheckVar has to be public! etc.!
+    
+    if((modifierFlags & toCheckVar)==modifierFlags)
+    {
+        return true;
+    }
+    return false;
+}
+
+/** b if true prints all important information
+ * else only infos for namecompletion
+ */
+public String getMethod(java.lang.reflect.Method m, boolean b)
+{
+    StringBuffer str = new StringBuffer();
+
+    if(b) 
+    {
+        str.append(modifiersToString(m.getModifiers()));
+        str.append(m.getReturnType()+ "\t");        
+    }
+    str.append(m.getName() + "(");
+
+    if(b) 
+    { 
+       str.append("\t");
+       Class[] args = m.getParameterTypes();
+       int i = 0;
+       for( ; i < args.length - 1; i++)
+       {
+          str.append(args[i] + ",");
+       }
+       if(i<args.length) str.append(args[i]);
+    }
+    str.append(")");
+
+    return str.toString();
+}
+
+/** b if true prints all important information
+ *	else only infos for namecompletion
+ */
+public String getField(java.lang.reflect.Field f, boolean b)
+{
+    StringBuffer str = new StringBuffer();
+	
+    if(b) 
+    {   
+        str.append(modifiersToString(f.getModifiers()));
+        str.append(f.getType()+"\t");
+    }
+
+    str.append(f.getName());
+
+    return str.toString();
+}
+
+
+public String modifiersToString(int mod)
+{
+  StringBuffer sb = new StringBuffer();
+
+  if(Modifier.isPrivate(mod)) sb.append("private\t");
+  else if(Modifier.isProtected(mod)) sb.append("protected\t");
+  else if(Modifier.isPublic(mod)) sb.append("public\t");
+  if(Modifier.isStatic(mod)) sb.append("static\t");
+  
+  if(Modifier.isNative(mod)) sb.append("native\t");
+  if(Modifier.isInterface(mod)) sb.append("interface\t");
+  if(Modifier.isFinal(mod)) sb.append("final\t");
+  if(Modifier.isAbstract(mod)) sb.append("abstract\t");  
+  if(Modifier.isStrict(mod)) sb.append("strict\t");
+  if(Modifier.isSynchronized(mod)) sb.append("synchronized\t");
+  if(Modifier.isTransient(mod)) sb.append("transient\t");
+  if(Modifier.isVolatile(mod)) sb.append("volatile\t");
+
+  return sb.toString();
+}

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.genvlin.plugins.gregdennis
+OpenIDE-Module-Layer: de/genvlin/plugins/gregdennis/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/genvlin/plugins/gregdennis/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

@@ -1,0 +1,45 @@
+//double x; for(int i=0; i<600; i++) { x=i*50; tm.set('E',i, x+""); tm.set('F',i, 0.02/9500.d*x-0.104+"");}
+//tm.findPeaks() -> left: m=.02/9500, n= -0.104
+//right: m=-0.02/9500, n= -0.0625);
+
+/** In this method their is an EQUATION. if data will have a peak greater
+  * then this 'y' we will get somewhere the highest point== peak
+  * and save this to column c,d
+  * todo: "greater + lower option" and this dont work directly in bss
+  */
+
+   public void findPeaks(double m, double n)
+    {
+        double x, y, py;
+        int nrow = 0;
+        double maxX = 0, maxY = -1e9;
+        boolean newMax = false;
+        
+        for(int i = 0; i < 4096; i++)
+        {
+            x = ((Double)tm.get('A', i)).doubleValue();
+            y = ((Double)tm.get('B', i)).doubleValue();
+
+             //EQUATION
+            py = m*x + n; //x*0.02/10000. - 0.11;
+            
+            if(py <= y)
+            {
+                if(y > maxY)
+                {
+                    maxX = x;
+                    maxY = y;
+                }
+                newMax=true;
+            }
+            
+            if(py > y && newMax)
+            {
+                tm.set('C', nrow, maxX+"");
+                tm.set('D', nrow, maxY+"");
+                nrow++;
+                newMax = false;
+                maxY = -1e9;
+            }
+        }
+    }

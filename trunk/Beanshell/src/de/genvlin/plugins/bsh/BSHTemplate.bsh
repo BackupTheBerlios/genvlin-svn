@@ -1,0 +1,9 @@
+import de.genvlin.core.plugin.Log;
+
+
+//this is a comment
+/*or this*/
+System.out.println("test");
+
+//or use genvlin logger:
+Log.log("testrunner",true);

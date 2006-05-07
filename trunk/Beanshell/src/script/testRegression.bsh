@@ -1,0 +1,7 @@
+import de.genvlin.core.plugin.Log;
+
+Log.log("\n\nRegression Test: you have to open at least two vector (one table with 2)",true);
+
+regression(3,4);
+
+//Log.log("Test",true);

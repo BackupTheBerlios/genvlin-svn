@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.genvlin.core
+OpenIDE-Module-Layer: de/genvlin/core/resources/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/genvlin/core/resources/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
+

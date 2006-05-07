@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.genvlin.platform
+OpenIDE-Module-Install: de/genvlin/platform/util/Installer.class
+OpenIDE-Module-Layer: de/genvlin/platform/resources/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/genvlin/platform/resources/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module-Requires: org.openide.windows.IOProvider
+
+Name: de/genvlin/platform/gui/TableDataLoader.class
+OpenIDE-Module-Class: Loader

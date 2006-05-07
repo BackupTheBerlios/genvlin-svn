@@ -1,0 +1,746 @@
+
+###############
+  MY TUTORIAL
+###############
+
+IDE DOC: (find /home/peter/quell/netbeans-src/ -iname api.html > allAPIdoc.txt)
+
+/home/peter/quell/netbeans-src/core/multiview/api/doc/org/netbeans/core/mutiview/doc-files/api.html
+/home/peter/quell/netbeans-src/core/javahelp/api/doc/org/netbeans/api/javahelp/doc-files/api.html
+/home/peter/quell/netbeans-src/core/settings/api/doc/org/netbeans/spi/settings/doc-files/api.html
+
+/home/peter/quell/netbeans-src/java/srcmodel/api/doc/org/openide/src/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/fs/src/org/openide/filesystems/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/awt/src/org/openide/awt/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/text/src/org/openide/text/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/util/src/org/openide/util/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/explorer/src/org/openide/explorer/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/nodes/src/org/openide/nodes/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/loaders/api/doc/org/openide/loaders/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/modules/src/org/openide/modules/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/execution/api/doc/org/openide/execution/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/actions/src/org/openide/actions/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/options/src/org/openide/options/doc-files/api.html
+/home/peter/quell/netbeans-src/openide/windows/src/org/openide/windows/doc-files/api.html
+
+
+Editor API
+Editor Library API
+File System API
+Settings Options API
+Text API
+Utilities API
+Window System API
+
+Datasystems API:  /home/peter/quell/netbeans-src/openide/loaders/api/doc/org/openide/loaders/doc-files/api.html
+    Loaders and Data Objects
+      What is a loader used for?
+      Multiple-file loaders
+      Single-file loaders
+      Entries
+      Getting a data object
+      Node Delegates
+      Writing a loader and data object
+      System loaders
+    Cookies
+      What is a cookie?
+      Standard cookies and supports
+      Writing a cookie
+      Writing a support for an existing cookie
+      Using an existing support
+    Extended Clipboard
+      Convertors
+      Event notification
+      Multi-transfers
+
+
+Nodes API:        /home/peter/quell/netbeans-src/openide/nodes/src/org/openide/nodes/doc-files/api.html
+Modules API
+
+
+Threads ??
+
+Examples:
+  netbeans-src/usersguide/demosrc/examples/      colorpicker, imageviewer, texteditor
+
+
+
+
+
+
+
+1 delete a menu item:
+------------------
+this layer in context: menu bar: ...
+
+
+2. set predefined visibility to true (favorites)
+-------------------------------------------------
+By using the <this layer in context> node, you can not only delete existing
+items, but you can also change their content. For example, the HTML editor
+works on HTML files, so in contrast to the regular IDE, which works with
+Java source files and projects as well, it makes sense to show the Favorites
+window in the initial layout.
+The definition of the window layout is also described as files in layers,
+all stored under the Windows2 folder. The files in the Windows2 folder are
+pseudo-human readable XML files defined by the Window System APIs.
+They are quite complex but the good news is that for purposes of the
+HTML editor it is not necessary to understand them fully, as shown below.
+Right-click the Windows2 node and choose Find.
+Search for an object named Favorites, ignoring the case.
+You will find two files:
+Windows2/Components/favorites.settings
+Windows2/Modes/explorer/favorites.wstcref
+The first file defines what the component is going to look like and how it gets created. As this does not need to
+be changed,
+there is no need to modify the file. The second is more interesting for your purposes, it contains the following:
+<tc-ref version="2.0">
+    <module name="org.netbeans.modules.favorites/1" spec="1.1" />
+    <tc-id id="favorites" />
+    <state opened="false" />
+</tc-ref>
+you have to modify the module dependencies, too!
+
+
+
+3. .shadow = links in unix!
+--------------------------------
+
+is a symbolic link and allows me to potentially create several references to the .instance I defined earlier.
+Doing it this way from the start will allow me to easily make the action available in multiple ways such as a
+toolbar button or keyboard shortcut ...
+The text for the menu item comes from the getName() method in the action class.
+
+4. reloading
+--------------
+You havent to restart the whole (target) platform if yoe change some things.
+You can right click on the application (not on the suite) and choose "Install
+/Reload in Target Platform" !!
+
+5. abbreviations
+----------------
+
+TOC = table of contents
+PDE = plug-in development environment
+OSGi bundle manifest = manifest.mf
+DTD = netbeans filesystem = Document Type Definition
+JNDI = Java Naming and Directory Interface
+DOM = Document Object Model, a programming interface specification being developed by the World Wide Web Consortium (W3C), lets a programmer create and modify HTML pages and XML documents as full-fledged program objects. Currently, HTML (Hypertext Markup Language) and XML (Extensible Markup Language) are ways to express a document in terms of a data structure. As program objects, such documents will be able to have their contents and data "hidden" within the object, helping to ensure control over who can manipulate the document. As objects, documents can carry with them the object-oriented procedures called methods. DOM is a strategic and open effort to specify how to provide programming control over documents. It was inspired in part by the advent of the new HTML capabilities generally called dynamic HTML and as a way to encourage consistent browser behavior with Web pages and their elements.
+MDR = The metadata repository, for new language support in nb
+POP = post office protocol
+
+6. some important words
+-------------------------
+
+Filesystems—Communication with persistent data storage
+
+Datasystems—Recognition and interpretation of different types of data
+
+Actions—User-invokable functionality
+
+Nodes—Useful hierarchical relationships between data or objects and some aspects of how they are presented
+        to the user
+Explorer—Presentation of hierarchical data structures
+
+Services/Lookup—Locating objects or services provided by modules, which can be used by other modules or
+        invoked by the user. Services are often used for performing complex operations on groups of objects,
+        such as compilation, execution or searching.
+
+Window System—manipulating and configuring windows and visual components of the user interface
+
+
+7. cookies
+----------------------------
+Cookies are a design pattern used to add behaviors to existing data object and nodes, or to separate
+implementation from the main object.
+The Loaders API describes how to use cookies in conjunction with data objects, including creating new
+cookie interfaces, creating new cookie support implementations, and reusing existing supports. The Nodes
+API also permits use of cookies to add behavior to nodes.
+
+CloneableEditorSupport—A base class that can provide implementations of the following Cookie interfaces as needed:
+
+
+EditorCookie—A cookie class that supports opening documents in an editor window and finding instances of editors
+      already editing a file. This cookie further permits nonblocking loads of documents and queries of document load status.
+LineCookie—A cookie class that provides access to a document as a set of lines, represented as Java objects which can be
+      held even if the document they reference is edited and line numbers change.
+OpenCookie—A cookie class that provides a method for opening a document in the default editor for that document type.
+EditCookie—A cookie very similar to OpenCookie, but used to emphasize that this is an editing operation on the object
+       where OpenCookie opens it graphically.
+ViewCookie—Also similar to OpenCookie, but used to emphasize that the operation will not modify the object, but only allow
+      the user to view it.
+PrintCookie—supports printing of a document.
+
+
+8. How to define configurable Shortcut for Component based shortcut?
+----------------------------------------------------------------------------------------------------------------
+    Q: The usual Swing way of defining Actions for your component is to create an Action instance and put it into the Input
+ and Action maps of your component. However how to make this Action's shortcut configurable from the Tools/Keyboard Shortcuts dialog?
+
+In order for the action to show up in Keyboards Shortcut dialog you need the action defined in the layer file under "Actions"
+folder and have the shortcut defined there under "Keymaps/<Profile Name>" linking to your action.
+    <folder name="Actions" >
+        <folder name="Window">
+            <file name="org-netbeans-core-actions-PreviousViewCallbackAction.instance"/>
+        </folder>
+    </folder>
+    <folder name="Keymaps">
+        <folder name="NetBeans">
+            <file name="S-A-Left.shadow">
+                <attr name="originalFile" stringvalue="Actions/Window/org-netbeans-core-actions-PreviousViewCallbackAction.instance"/>
+            </file>
+        </folder>
+    </folder>
+The mentioned Action has to be a subclass of org.openide.util.actions.CallbackSystemAction. It does not necessarily has to perform
+the action, it's just a placeholder for linking the shortcut. You might want to override it's getActionMapKey() and give it a
+reasonable key.
+The actual action that does the work in your component (preferably a simple Swing javax.swing.Action) is to be put into your
+TopComponent's ActionMap. The key for the ActionMap has to match the key defined in the global action's getActionMapKey() method.
+        getActionMap().put("PreviousViewAction", new MyPreviousTabAction());
+This way even actions from multiple TopComponents with the same gesture (eg. "switch to next tab") can share the same configurable
+shortcut.
+Note: Don't define your action's shortcut and don't put it into any of the TopComponent's javax.swing.InputMap. Otherwise the
+component would not pick up the changed shortcut from the global context.
+
+9. Matisse
+----------------------------
+A .form file, which stores the information that is used to generate the .java file when you make changes to the form in the GUI
+Builder. This file does not need to be distributed with your application. If you delete this file, you can no longer use the GUI
+Builder to change the form.
+Use the iconbar in the gui-editor for other alignment!!!
+
+
+10. Root Filesystem
+---------------------------
+FileObject fo = Repository.getDefault().getDefaultFileSystem().getRoot().getFileObject("RssFeeds");//Filesystem API
+//DataObject.find(fo).getNodeDelegate()
+
+
+11. Errors
+-----------
+
+ErrorManager em = ErrorManager.getDefault();//you need Utilities API
+//what is different to: ???
+//em = ErrorManager.getDefault().getInstance("org.myorg.SpecialClass"); // NOI18N
+
+em.notify(Throwable ex);
+em.log(ErrorManager.WARNING, "WarningString");
+
+
+12. Windowmanager
+---------------------
+WindowManager.getDefault().findTopComponent(PREFERRED_ID);
+WindowManager.getDefault().getRegistry().addPropertyChangeListener(pcl);
+
+
+13. Bundle = I18N =? L10N
+-----------------------------
+NbBundle.getMessage(FeedTopComponent.class, "CTL_FeedTopComponent"));
+
+14. Dialogs
+---------------
+
+NotifyDescriptor.InputLine nd = new NotifyDescriptor.InputLine(
+                    NbBundle.getMessage(RssNode.class, "FN_askfolder_msg"), //NOI18N
+                    NbBundle.getMessage(RssNode.class, "FN_askfolder_title"), //NOI18N
+                    NotifyDescriptor.OK_CANCEL_OPTION,
+                    NotifyDescriptor.PLAIN_MESSAGE);
+Object result = DialogDisplayer.getDefault().notify(nd);
+if(result.equals(NotifyDescriptor.OK_OPTION))
+{
+   final String folderString = nd.getInputText();
+   try { DataFolder.create(folder, folderString);   }
+   catch (IOException ex)
+   ...
+}
+
+15. Get Active Window
+---------------------
+
+TopComponent activetc = TopComponent.getRegistry().getActivated();
+
+16. use WeakListeners! Not deprecated WeakListener!
+---------------------------------------------------
+E.G.
+eventFiring.addVetoableChangeListener(WeakListeners.vetoableChange(sourceListener, source));
+
+17. Access files from filesystem or jar!
+----------------------------------------
+<filesystem>
+  <folder name="myFolder">
+    <file name="myFile.txt" url="resources/aTextFile.txt"/>
+  </folder>
+</filesystem>
+
+The url attribute is important: It says where the contents of myFile.txt lives in the module's jar file. This path is relative to the
+location of the layer file. So, if the layer file is org/netbeans/modules/mymodule/layer.xml, then in the module jar there should also
+be a text file org/netbeans/modules/mymodule/resources/aTextFile.txt. When some code requests an InputStream for myFolder/myFile.txt,
+that text file in the module jar is what will actually be read.
+
+18. register your class on startup!
+-----------------------------------
+a) manifest.mf:
+Name: de/genvlin/platform/gui/NbLog.class
+
+b) Installer.java extends ModuleInstall and implements
+public void restored()
+
+c) nbproject/project.xml:
+<dependency>
+  <code-name-base>org.openide.modules</code-name-base>
+  <build-prerequisite/>
+  <compile-dependency/>
+  <run-dependency>
+    <specification-version>6.5.1</specification-version>
+  </run-dependency>
+</dependency>
+
+19. I18N
+--------
+instead of: java.util.ResourceBundle.getBundle("de/peathal/testapp/Bundle").getString("Whow!");
+use:
+NbBundle.getBundle(MyFirstAction.class).getString("Whow!");
+
+
+###############
+#    MY FAQ   #
+###############
+
+
+1. Is this a bug:
+-----------------
+Netbeans can't create lock files on FAT32 filesystem , where I have stored the application
+based on the platform. (okay! - Logically!)
+But now NB throws many exceptions at startup so that the application hang (not okay)!
+How to prevent this? (Okay I changed the dir to a reiserfs. But may be: a user of this appl. have the
+same problem??)
+
+
+2. Why I can't easily write to my org-netbeans-modules-java-mime-resolver.xml:
+-------------------------------------------------------------------------------------
+<MIME-resolver>
+    <file>
+        <ext name="java"/>
+        <ext name="bsh"/>
+        <ext name="BSH"/>
+        <resolver mime="text/x-java"/>
+    </file>
+</MIME-resolver>
+So that the Application handles the bsh file as java files. How to do this?
+
+3. Where is TopManager? I'm trying to do the examples from the O'Reilly book
+------------------------------------------------------------------------------------------
+
+The O'Reilly book is pretty old (written between 2001 and 2002) - the chapters on architectural
+background will still work, but many of the examples won't.
+The generation of NB it was written for is from before Lookup was in heavy use, and TopManager
+ was a class with a bunch of static methods for getting service objects. The class still exists
+in org.openide.deprecated, but this module is no longer included in NB, nor even distributed
+publicly any more.
+For pretty much everything available via TopManager, simply take the class you were looking
+for and try SomeClass.getDefault() - that's typically the modern way to do this sort of thing.
+TopManager caused a tangle of interdependencies between different APIs that it was very desirable
+ to remove.
+If you were calling
+TopManager.getDefault().getPlaces().nodes().projectDesktop()
+sorry - there is no equivalent to this concept in NB 4.0 and later. Rather, there is a rich set
+of project-related APIs which can be used for various purposes. As a rule, there is no 1-to-1
+conversion from the above idiom to NB 4.0+; the affected O'Reilly examples would need to be
+rewritten to make sense today.
+
+4. Common calls that should be done slightly differently in NetBeans than standard Swing apps
+    (loading images, localized strings, showing dialogs)
+------------------------------------------------------------------------------------------
+
+There are a few cases where NetBeans has convenience classes or facilities that you should use,
+instead of doing them the way you may be used to. They are:
+Loading images - Don't use ImageIO.read() or Toolkit.loadImage() - instead, use Utilities.loadImage()
+ - it has an optimized image caching strategy, and will play nicely with NetBeans module classloaders
+Loading resource bundles/localized strings - Don't use ResourceBundle directly - instead, use
+ NbBundle.getMessage() - it will play nicely with NetBeans classloaders, and Strings resolved this
+way can be branded using the standard branding mechanism (this is the way you change the title of
+your application from "NetBeans" to something else). Also, do not hold a reference to a resource
+bundle - just call NbBundle.getMessage() every time - bundles are cached, the call is fast, and
+in a large application, holding resource bundles eats memory wastefully
+Showing dialogs - instead of creating a JDialog and showing it, or using JOptionPane, use
+NotifyDescriptor or DialogDescriptor to define your dialog and its contents, then pass these
+to DialogDisplayer.notify() - such dialogs will play nicely with NetBeans' windowing system,
+global actions, etc.
+
+5. Beanshell support
+----------------------
+
+There exists:
+./netbeans-src/core/test/perf/src/org/netbeans/core/resources/BeanShellScriptType.settings
+but where are the docs?
+There is the coyote project! -> org.netbeans.modules.coyote but no beanshell support!
+
+
+6. Lookup! - Hmmh? And Whats that:
+----------------------------------
+topComponent.associateLookup(ExplorerUtils.createLookup(exlporerManager, actionMap));
+
+
+7. What is TestNameImpl ?
+---------------------------
+== Implementation of interface TestName!
+
+
+8.  Is it possible that more than one layer.xml exists (in one module)?
+---------------------------------------------------------------------------
+
+
+9. Is this right:
+Action registration
+------------------------
+You have to register actions to give nb access to them. And they can access also unregistered classes.
+
+10. My DataLoader doesn't load!?
+------------------------------------
+add to manifest.mf the following lines( >with< empty line before!!)
+
+Name: org/anypackagepos/YourDataLoader.class
+OpenIDE-Module-Class: Loader
+
+11. Why are the WeakListener methods deprecated?
+-------------------------------------------------
+use WeakListeners instead!
+
+12. How to change application name?
+-----------------------------------
+Either right click project node -> Properties -> Application ...
+or in a <modulesName>/branding/modules/org-netbeans-core-windows.jar/org/netbeans/core/windows/view/ui/Bundle.properties
+
+13. How to generate serialVersionUI ?
+-------------------------------------
+perlScript in feadreader tut?
+eclipse generate it if you impl Serializable!!
+netbeans??
+
+
+
+
+
+
+
+
+
+------------
+| eclipse  |
+------------
+
+
+from org.eclipse.platform.doc.isv.3.1.pdf:
+
+<extension point="org.eclipse.team.core.fileTypes">
+  <fileTypes
+        extension="txt
+        "type="text"/>
+</extension>
+
+
+from introduction: org.eclipse.platform.pde.doc.user."version".pdf
+
+How to enable access restrictions?
+To take advantage of the PDE access restriction support, the only requirement is that the plug−ins in question
+contain an OSGi bundle manifest.mf. PDE, which manages the plug−in classpath, then takes care of the rest.
+If the plug−in does not contain a manifest.mf file, that file can be created as follows:
+       1. Open the plugin.xml in the plug−in manifest editor.
+       2. In the Plug−in Content section of the Overview page, click on the 'create an OSGi bundle manifest'
+          link.
+
+
+
+
+
+
+
+
+
+
+################
+  All Packages
+################
+
+
+/home/peter/quell/netbeans-src/ant/src/org/apache/tools/ant/module/api/support/package.html
+/home/peter/quell/netbeans-src/ant/src/org/apache/tools/ant/module/api/package.html
+/home/peter/quell/netbeans-src/ant/src/org/apache/tools/ant/module/spi/package.html
+/home/peter/quell/netbeans-src/ant/grammar/src/org/netbeans/modules/ant/grammar/package.html
+/home/peter/quell/netbeans-src/ant/project/src/org/netbeans/api/project/ant/package.html
+/home/peter/quell/netbeans-src/ant/project/src/org/netbeans/spi/project/ant/package.html
+/home/peter/quell/netbeans-src/ant/project/src/org/netbeans/spi/project/support/ant/ui/package.html
+/home/peter/quell/netbeans-src/ant/project/src/org/netbeans/spi/project/support/ant/package.html
+/home/peter/quell/netbeans-src/mdr/src/org/netbeans/mdr/persistence/btreeimpl/btreeindex/package.html
+/home/peter/quell/netbeans-src/mdr/src/org/netbeans/mdr/persistence/btreeimpl/btreestorage/package.html
+/home/peter/quell/netbeans-src/mdr/extras/jdbcstorage/src/org/netbeans/mdr/persistence/jdbcimpl/package.html
+/home/peter/quell/netbeans-src/mdr/mdrapi/src/org/netbeans/api/mdr/package.html
+/home/peter/quell/netbeans-src/mdr/mdrapi/src/org/netbeans/api/xmi/package.html
+/home/peter/quell/netbeans-src/web/ddapi/doc/org/netbeans/api/web/dd/common/package.html
+/home/peter/quell/netbeans-src/web/ddapi/doc/org/netbeans/api/web/dd/package.html
+/home/peter/quell/netbeans-src/web/webapi/src/org/netbeans/modules/web/api/webmodule/package.html
+/home/peter/quell/netbeans-src/web/webapi/src/org/netbeans/modules/web/spi/webmodule/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/api/xml/cookies/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/api/xml/actions/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/api/xml/services/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/api/xml/parsers/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/api/xml/options/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/api/xml/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/spi/xml/cookies/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/spi/xml/services/package.html
+/home/peter/quell/netbeans-src/xml/api/src/org/netbeans/spi/xml/package.html
+/home/peter/quell/netbeans-src/xml/tax/lib/src/org/netbeans/tax/io/package.html
+/home/peter/quell/netbeans-src/xml/tax/lib/src/org/netbeans/tax/dom/package.html
+/home/peter/quell/netbeans-src/xml/tax/lib/src/org/netbeans/tax/spec/package.html
+/home/peter/quell/netbeans-src/xml/tax/lib/src/org/netbeans/tax/package.html
+/home/peter/quell/netbeans-src/xml/tax/src/org/netbeans/modules/xml/tax/beans/customizer/package.html
+/home/peter/quell/netbeans-src/xml/core/src/org/netbeans/modules/xml/api/model/package.html
+/home/peter/quell/netbeans-src/xml/core/src/org/netbeans/modules/xml/dtd/grammar/package.html
+/home/peter/quell/netbeans-src/xml/core/src/org/netbeans/modules/xml/dtd/package.html
+/home/peter/quell/netbeans-src/xml/core/src/org/netbeans/modules/xml/spi/dom/package.html
+/home/peter/quell/netbeans-src/xml/core/src/org/netbeans/modules/xml/core/tree/package.html
+/home/peter/quell/netbeans-src/xml/core/src/org/netbeans/modules/xml/core/cookies/package.html
+/home/peter/quell/netbeans-src/xml/core/src/org/netbeans/modules/xml/core/package.html
+/home/peter/quell/netbeans-src/xml/tools/src/org/netbeans/modules/xml/tools/generator/package.html
+/home/peter/quell/netbeans-src/xml/text-edit/src/org/netbeans/modules/xml/text/syntax/dom/package.html
+/home/peter/quell/netbeans-src/xml/text-edit/src/org/netbeans/modules/xml/text/syntax/javacc/package.html
+/home/peter/quell/netbeans-src/xml/schema/src/org/netbeans/modules/xml/schema/package.html
+/home/peter/quell/netbeans-src/xml/catalog/src/org/netbeans/modules/xml/catalog/spi/package.html
+/home/peter/quell/netbeans-src/xml/catalog/src/org/netbeans/modules/xml/catalog/impl/sun/package.html
+/home/peter/quell/netbeans-src/xml/catalog/src/org/netbeans/modules/xml/catalog/impl/package.html
+/home/peter/quell/netbeans-src/xml/catalog/src/org/netbeans/modules/xml/catalog/package.html
+/home/peter/quell/netbeans-src/i18n/src/org/netbeans/modules/i18n/wizard/package.html
+/home/peter/quell/netbeans-src/core/term/src/org/netbeans/lib/terminalemulator/package.html
+/home/peter/quell/netbeans-src/core/startup/src/org/netbeans/core/startup/package.html
+/home/peter/quell/netbeans-src/core/multiview/api/doc/org/netbeans/core/api/multiview/package.html
+/home/peter/quell/netbeans-src/core/multiview/api/doc/org/netbeans/core/spi/multiview/package.html
+/home/peter/quell/netbeans-src/core/javahelp/api/doc/org/netbeans/api/javahelp/package.html
+/home/peter/quell/netbeans-src/core/settings/api/doc/org/netbeans/spi/settings/package.html
+/home/peter/quell/netbeans-src/core/progress/api/doc/org/netbeans/api/progress/aggregate/package.html
+/home/peter/quell/netbeans-src/core/progress/api/doc/org/netbeans/api/progress/package.html
+/home/peter/quell/netbeans-src/j2ee/ddapi/doc/org/netbeans/modules/j2ee/dd/api/ejb/package.html
+/home/peter/quell/netbeans-src/j2ee/ddapi/doc/org/netbeans/modules/j2ee/dd/api/web/package.html
+/home/peter/quell/netbeans-src/j2ee/ddapi/doc/org/netbeans/modules/j2ee/dd/api/application/package.html
+/home/peter/quell/netbeans-src/j2ee/ddapi/doc/org/netbeans/modules/j2ee/dd/api/common/package.html
+/home/peter/quell/netbeans-src/j2ee/ejbapi/src/org/netbeans/modules/j2ee/api/ejbjar/package.html
+/home/peter/quell/netbeans-src/j2ee/ejbapi/src/org/netbeans/modules/j2ee/spi/ejbjar/support/package.html
+/home/peter/quell/netbeans-src/j2ee/ejbapi/src/org/netbeans/modules/j2ee/spi/ejbjar/package.html
+/home/peter/quell/netbeans-src/java/api/src/org/netbeans/api/java/queries/package.html
+/home/peter/quell/netbeans-src/java/api/src/org/netbeans/api/java/classpath/package.html
+/home/peter/quell/netbeans-src/java/api/src/org/netbeans/spi/java/queries/package.html
+/home/peter/quell/netbeans-src/java/api/src/org/netbeans/spi/java/classpath/support/package.html
+/home/peter/quell/netbeans-src/java/api/src/org/netbeans/spi/java/classpath/package.html
+/home/peter/quell/netbeans-src/java/src/org/netbeans/modules/java/resources/Package.html
+/home/peter/quell/netbeans-src/java/srcmodel/api/doc/org/openide/src/nodes/package.html
+/home/peter/quell/netbeans-src/java/srcmodel/api/doc/org/openide/src/package.html
+/home/peter/quell/netbeans-src/java/platform/src/org/netbeans/api/java/platform/package.html
+/home/peter/quell/netbeans-src/java/platform/src/org/netbeans/spi/java/platform/support/package.html
+/home/peter/quell/netbeans-src/java/platform/src/org/netbeans/spi/java/platform/package.html
+/home/peter/quell/netbeans-src/java/project/src/org/netbeans/spi/java/project/support/ui/package.html
+/home/peter/quell/netbeans-src/java/project/src/org/netbeans/modules/java/project/resources/package-info.html
+/home/peter/quell/netbeans-src/versioncontrol/src/org/netbeans/modules/turbo/package.html
+/home/peter/quell/netbeans-src/debuggercore/api/src/org/netbeans/api/debugger/package.html
+/home/peter/quell/netbeans-src/debuggercore/api/src/org/netbeans/spi/debugger/package.html
+/home/peter/quell/netbeans-src/debuggercore/src/org/netbeans/spi/debugger/ui/package.html
+/home/peter/quell/netbeans-src/debuggercore/src/org/netbeans/modules/debugger/ui/views/package.html
+/home/peter/quell/netbeans-src/debuggercore/src/org/netbeans/modules/debugger/ui/actions/package.html
+/home/peter/quell/netbeans-src/debuggercore/viewmodel/src/org/netbeans/spi/viewmodel/package.html
+/home/peter/quell/netbeans-src/debuggerjpda/api/src/org/netbeans/api/debugger/jpda/package.html
+/home/peter/quell/netbeans-src/debuggerjpda/api/src/org/netbeans/spi/debugger/jpda/package.html
+/home/peter/quell/netbeans-src/debuggerjpda/src/org/netbeans/modules/debugger/jpda/util/package.html
+/home/peter/quell/netbeans-src/debuggerjpda/src/org/netbeans/modules/debugger/jpda/package.html
+/home/peter/quell/netbeans-src/nbbuild/antsrc/org/netbeans/nbbuild/package.html
+/home/peter/quell/netbeans-src/editor/errorstripe/api/src/org/netbeans/spi/editor/errorstripe/package.html
+/home/peter/quell/netbeans-src/editor/libsrc/org/netbeans/editor/ext/package.html
+/home/peter/quell/netbeans-src/properties/src/org/netbeans/modules/properties/package.html
+/home/peter/quell/netbeans-src/translatedfiles/src/java/src/org/netbeans/modules/java/resources/Package_ru.html
+/home/peter/quell/netbeans-src/translatedfiles/src/java/src/org/netbeans/modules/java/resources/Package_zh_CN.html
+/home/peter/quell/netbeans-src/translatedfiles/src/java/src/org/netbeans/modules/java/resources/Package_nl.html
+/home/peter/quell/netbeans-src/translatedfiles/src/java/src/org/netbeans/modules/java/resources/Package_ja.html
+/home/peter/quell/netbeans-src/translatedfiles/src/java/project/src/org/netbeans/modules/java/project/resources/package-info_zh_CN.html
+/home/peter/quell/netbeans-src/translatedfiles/src/java/project/src/org/netbeans/modules/java/project/resources/package-info_ja.html
+/home/peter/quell/netbeans-src/websvc/websvcddapi/doc/org/netbeans/modules/j2ee/dd/api/webservices/package.html
+
+ /home/peter/quell/netbeans-src/classfile/src/org/netbeans/modules/classfile/package.html
+/home/peter/quell/netbeans-src/tasklist/api/doc/org/netbeans/api/tasklist/package.html
+/home/peter/quell/netbeans-src/tasklist/api/doc/org/netbeans/spi/tasklist/package.html
+/home/peter/quell/netbeans-src/tasklist/api/src/org/netbeans/modules/tasklist/client/package.html
+/home/peter/quell/netbeans-src/tasklist/api/src/org/netbeans/modules/tasklist/providers/package.html
+/home/peter/quell/netbeans-src/tasklist/bugs/src/org/netbeans/modules/tasklist/bugs/javanet/package.html
+/home/peter/quell/netbeans-src/tasklist/core/src/org/netbeans/modules/tasklist/core/export/package.html
+/home/peter/quell/netbeans-src/tasklist/core/src/org/netbeans/modules/tasklist/core/translators/package.html
+/home/peter/quell/netbeans-src/tasklist/suggestions/ui/src/org/netbeans/modules/tasklist/suggestions/ui/package.html
+/home/peter/quell/netbeans-src/tasklist/suggestions/src/org/netbeans/modules/tasklist/suggestions/package.html
+/home/peter/quell/netbeans-src/tasklist/javadoc/src/org/netbeans/modules/tasklist/javadoc/ext/package.html
+/home/peter/quell/netbeans-src/openide/fs/src/org/openide/filesystems/package.html
+/home/peter/quell/netbeans-src/openide/io/api/doc/org/openide/windows/package.html
+/home/peter/quell/netbeans-src/openide/awt/src/org/openide/awt/package.html
+/home/peter/quell/netbeans-src/openide/text/src/org/openide/text/package.html
+/home/peter/quell/netbeans-src/openide/util/src/org/openide/xml/package.html
+/home/peter/quell/netbeans-src/openide/util/src/org/openide/util/io/package.html
+# /home/peter/quell/netbeans-src/openide/util/src/org/openide/util/lookup/package.html
+# /home/peter/quell/netbeans-src/openide/util/src/org/openide/util/actions/package.html
+
+/home/peter/quell/netbeans-src/openide/util/src/org/openide/util/datatransfer/package.html
+
+# /home/peter/quell/netbeans-src/openide/util/src/org/openide/util/package.html
+# /home/peter/quell/netbeans-src/openide/util/src/org/openide/package.html
+/home/peter/quell/netbeans-src/openide/util/enum/src/org/openide/util/enum/package.html
+/home/peter/quell/netbeans-src/openide/explorer/src/org/openide/explorer/view/package.html
+/home/peter/quell/netbeans-src/openide/explorer/src/org/openide/explorer/propertysheet/package.html
+/home/peter/quell/netbeans-src/openide/explorer/src/org/openide/explorer/package.html
+/home/peter/quell/netbeans-src/openide/dialogs/src/org/openide/package.html
+/home/peter/quell/netbeans-src/openide/looks/api/doc/org/netbeans/api/nodes2looks/package.html
+/home/peter/quell/netbeans-src/openide/looks/api/doc/org/netbeans/spi/looks/package.html
+/home/peter/quell/netbeans-src/openide/nodes/src/org/openide/cookies/package.html
+/home/peter/quell/netbeans-src/openide/nodes/src/org/openide/nodes/package.html
+/home/peter/quell/netbeans-src/openide/loaders/api/doc/org/openide/loaders/package.html
+/home/peter/quell/netbeans-src/openide/convertor/api/doc/org/netbeans/api/convertor/package.html
+/home/peter/quell/netbeans-src/openide/convertor/api/doc/org/netbeans/spi/convertor/package.html
+/home/peter/quell/netbeans-src/openide/modules/src/org/openide/modules/package.html
+/home/peter/quell/netbeans-src/openide/execution/api/doc/org/openide/execution/package.html
+/home/peter/quell/netbeans-src/openide/actions/src/org/openide/actions/package.html
+/home/peter/quell/netbeans-src/openide/options/src/org/openide/options/package.html
+/home/peter/quell/netbeans-src/openide/windows/src/org/openide/windows/package.html
+/home/peter/quell/netbeans-src/openide/registry/api/doc/org/netbeans/api/registry/package.html
+/home/peter/quell/netbeans-src/openide/registry/api/doc/org/netbeans/spi/registry/package.html
+/home/peter/quell/netbeans-src/projects/queries/src/org/netbeans/api/queries/package.html
+/home/peter/quell/netbeans-src/projects/queries/src/org/netbeans/spi/queries/package.html
+/home/peter/quell/netbeans-src/projects/libraries/src/org/netbeans/api/project/libraries/package.html
+/home/peter/quell/netbeans-src/projects/projectapi/src/org/netbeans/api/project/package.html
+/home/peter/quell/netbeans-src/projects/projectapi/src/org/netbeans/spi/project/package.html
+/home/peter/quell/netbeans-src/projects/projectuiapi/src/org/netbeans/spi/project/ui/support/package.html
+/home/peter/quell/netbeans-src/projects/projectuiapi/src/org/netbeans/spi/project/ui/package.html
+/home/peter/quell/netbeans-src/projects/projectuiapi/src/org/netbeans/spi/project/ui/templates/support/package.html
+/home/peter/quell/netbeans-src/j2eeserver/api/doc/org/netbeans/modules/j2ee/deployment/plugins/api/package.html
+/home/peter/quell/netbeans-src/j2eeserver/api/doc/org/netbeans/modules/j2ee/deployment/plugins/spi/package.html
+/home/peter/quell/netbeans-src/javacvs/test/unit/library/org/netbeans/lib/cvsclient/package.html
+/home/peter/quell/netbeans-src/javadoc/src/org/netbeans/modules/javadoc/httpfs/package.html
+/home/peter/quell/netbeans-src/javadoc/src/org/netbeans/modules/javadoc/search/package.html
+
+
+
+
+
+
+
+
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
+import javax.swing.AbstractAction;
+import org.openide.DialogDisplayer;
+import org.openide.ErrorManager;
+import org.openide.NotifyDescriptor;
+import org.openide.filesystems.FileLock;
+import org.openide.filesystems.FileObject;
+import org.openide.loaders.DataFolder;
+import org.openide.util.Mutex.Action;
+import org.openide.util.NbBundle;
+import org.test.application.Feed;
+
+
+/** Creating an action for adding a feed */
+    private static class AddRssAction extends AbstractAction
+    {
+        private DataFolder folder;
+
+        public AddRssAction(DataFolder df)
+        {
+            folder = df;
+            putValue(Action.NAME, NbBundle.getMessage(RssNode.class, "FN_addbutton"));
+        }
+
+        public void actionPerformed(ActionEvent ae)
+        {
+            NotifyDescriptor.InputLine nd = new NotifyDescriptor.InputLine(
+                    NbBundle.getMessage(RssNode.class, "FN_askurl_msg"), //NOI18N
+                    NbBundle.getMessage(RssNode.class, "FN_askurl_title"), //NOI18N
+                    NotifyDescriptor.OK_CANCEL_OPTION,
+                    NotifyDescriptor.PLAIN_MESSAGE);
+            Object result = DialogDisplayer.getDefault().notify(nd);
+            if (result.equals(NotifyDescriptor.OK_OPTION))
+            {
+                final String urlString = nd.getInputText();
+                try
+                {
+                    Feed f = new Feed(urlString);
+                    FileObject fld = folder.getPrimaryFile();
+                    String baseName = "RssFeed"; //NOI18N
+                    int ix = 1;
+                    while (fld.getFileObject(baseName + ix, "ser") != null)
+                    {
+                        ix++;
+                    }
+                    FileLock lock = null;
+                    try
+                    {
+                        FileObject writeTo = fld.createData(baseName + ix, "ser");
+                        lock = writeTo.lock();
+                        ObjectOutputStream str = new ObjectOutputStream(writeTo.getOutputStream(lock));
+                        str.writeObject(f);
+                    }
+                    catch (IOException ioe)
+                    {
+                        ErrorManager.getDefault().notify(ioe);
+                    }
+                    finally
+                    {
+                        if (lock != null)
+                            lock.releaseLock();
+                    }
+                }
+                catch (MalformedURLException ex)
+                {
+                    IllegalArgumentException iae = new IllegalArgumentException(NbBundle.getMessage(RssNode.class,
+                            "FN_askurl_err", urlString, ex)); //NOI18N
+                    // JDK 1.5 only: ", ex" CHANGE: substitute line
+                    throw iae;
+                }
+            }//if
+        }//actionPerfiormed
+    }//class AddRssAction
+
+
+
+Guten Tag!
+
+Ich bin Physik Student der Universität Bayreuth im 7. Semester und würde gern bei ihnen ein Praktikum im Sommer absolvieren. Wo finde ich Informationen zur Bewerbung?
+Und wie kann ich herausfinden welche ihrer Geschäftstelle den Schwerpunkt auf Javaprogrammierung legt? Da mich besonders dies interresiert.
+Leider hab ich diese Informationen auf ihrer Webseite nicht finden können.
+
+Mit freundlichen Grüßen, Peter Karich.
+
+Sun Microsystems GmbH
+Sonnenallee 1
+85551 Kirchheim-Heimstetten
+Tel.: 089 / 46008-0
+
+Sun Microsystems GmbH
+Zettachring 10 a
+70567 Stuttgart
+Tel.: 0711 / 72098 - 0
+
+Sun Microsystems GmbH
+Dr.-Leo-Ritter-Straße 7
+93049 Regensburg
+Tel: 0941 / 30 75-0
+
+
+zamestnani@sun.cz
+---------------------------------------
+
+
+www.heise.de 7 tage news ticker nach folgendem durchsuchen (aktuellen tag speichern!)
+
+sun
+java
+microsof
+netbeans
+linux
+open source
+
+
+google for Design Principles java tutorial

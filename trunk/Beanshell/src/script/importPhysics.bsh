@@ -1,0 +1,85 @@
+/** Feel free to change the names and report wrong constants!
+*/
+public void importPhysics()
+{ 	
+        //setNameSpace(global.namespace);
+        
+        c = 299792458;
+        help.put(c, "c = Speed of light in vacuum (m/s)");
+
+	u = 1.66053886e-27;
+        help.put(u, "u = Atomic mass constant (kg)");
+
+	vNorm = 22.413996;
+        help.put(vNorm, "vNorm = norm volume (l/mol)");
+
+	pNorm = 101325;
+        help.put(pNorm, "pNorm = norm pressure (Pa)");
+
+        tNorm = 273.15;
+        help.put(tNorm, "tNorm = norm temperature (K)");
+
+	g = 9.80665;
+        help.put(g, "g = standard acceleration of gravity (for berlin) (m/s^2)");
+
+	G = 6.6742e-11;
+        help.put(G, "G = Newtonian constant of gravitation (m^3/kg/s^2)");
+
+	m0 = PI*4.0e-7;
+        help.put(m0, "m0 = magnetic const. (V*s/A/m)");
+
+	e0 = 8.854187817e-12;
+	//this will be zero: e0 = 1/c/m0/c;
+        help.put(e0, "e0 = electric const. (A*s/V/m)");
+
+        Z0 = c*m0;
+        help.put(Z0, "Z0 = Characteristic impedance of vacuum V/A");
+
+	N_A = 6.0221415e+23;
+        help.put(N_A, "N_A = Avogadros number (1/mol)");
+
+	k = 1.3806505e-23;
+        help.put(k, "k = Boltzmann const. (J/K)");
+
+	F = 96485.3383;
+        help.put(F, "F = Faraday const. (A*s/mol)");
+
+	h = 6.6260693e-34;
+        help.put(h, "h = Planck's constant (J*s)");
+
+	Ry = 10973731.568525;
+        help.put(Ry, "Ry = Rydberg (infinity) const. (1/m)");
+
+	R = 8.314472;
+        help.put(R, "R = Gasconst. (J/K/mol)");
+
+	q = 1.602177e-19;
+        help.put(q, "q = elementary charge (A*s)");
+
+	me = 9.1093897e-31;
+        help.put(me, "me = mass of electron (kg)");
+
+        alpha = q*q/(4*PI*e0*h/2/PI*c);
+        help.put(alpha, "alpha = fine-structure constant (1)");
+
+        //sigma will be infinity??:
+	//sigma = 16.99975308/c;
+	sigma = 5.670400e-8;
+        help.put(sigma, "Stefan-Boltzmann constant W·m^-2·K^-4");
+
+	String units()
+	{ 
+            newton = "\nNewton = kg*m/s^2  = J/m\n";
+            joule = "Joule  = N*m = A*s*V = Watt*s\n";
+            farad = "F = C/V\n";
+            tesla = "T = J/A/m^2\n";
+            coulomb = "C = A*s\n";
+            ohm = "ohm = V/A\n";
+            henry = "H = J/A^2 = V*s/A\n";
+            pascal = "Pa = N/m^2 = 10^-5 bar\n"; //todo: re-think about it
+
+            return newton+joule+farad+tesla+coulomb+ohm+henry+pascal;
+	}
+
+    //return this;
+} 

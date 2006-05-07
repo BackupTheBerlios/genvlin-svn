@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: de.genvlin.plugins.jfreechart
+OpenIDE-Module-Install: de/genvlin/plugins/jfreechart/Installer.class
+OpenIDE-Module-Localizing-Bundle: de/genvlin/plugins/jfreechart/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

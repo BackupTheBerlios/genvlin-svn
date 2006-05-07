@@ -1,0 +1,45 @@
+public void importMath()
+{
+    setNameSpace(global.namespace);
+
+sin(d){return Math.sin(d);}
+cos(d){return Math.cos(d);}
+tan(d){return Math.tan(d);}
+atan2(d1,d2){return Math.atan2(d1,d2);}
+sqrt(d){return Math.sqrt(d);}
+pow(d1,d2){return Math.pow(d1,d2);}
+min(i,i){return Math.min(i,i);}
+max(i,i){return Math.max(i,i);}
+abs(d){return Math.abs(d);}
+signum(d){return Math.signum(d);}
+IEEEremainder(d1,d2){return Math.IEEEremainder(d1,d2);}
+acos(d){return Math.acos(d);}
+asin(d){return Math.asin(d);}
+atan(d){return Math.atan(d);}
+cbrt(d){return Math.cbrt(d);}
+ceil(d){return Math.ceil(d);}
+cosh(d){return Math.cosh(d);}
+exp(d){return Math.exp(d);}
+expm1(d){return Math.expm1(d);}
+floor(d){return Math.floor(d);}
+hypot(d1,d2){return Math.hypot(d1,d2);}
+log(d){return Math.log(d);}
+log10(d){return Math.log10(d);}
+log1p(d){return Math.log1p(d);}
+random(){Math.random();}
+rint(d){return Math.rint(d);}
+round(d){return Math.round(d);}
+round(d){return Math.round(d);}
+sinh(d){return Math.sinh(d);}
+tanh(d){return Math.tanh(d);}
+toDegrees(d){return Math.toDegrees(d);}
+toRadians(d){return Math.toRadians(d);}
+ulp(d){return Math.ulp(d);}
+ulp(d){return Math.ulp(d);}
+getE(){return Math.E;}
+//getPI(){return Math.PI;}
+E=Math.E;
+PI=Math.PI;
+
+    //return this;
+}

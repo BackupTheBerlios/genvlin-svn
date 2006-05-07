@@ -1,0 +1,6 @@
+to yield            nachgeben; weichen 
+to dispatch         abfertigen; verschicken 
+incident            Zwischenfall
+starvation          Hungern
+mutual exclusion    gegenseitiges Ausschliessen
+immutable           unveränderlich

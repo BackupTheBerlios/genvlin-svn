@@ -1,0 +1,9 @@
+public ArrayList integrate(colFrom)
+{ 
+  ArrayList colTo = new ArrayList();
+  for(int i=0; i<colFrom.size()-1; i++)
+  { 
+        colTo.add(i, colFrom.get(i) +colFrom.get(i+1));
+  }
+  return colTo;
+}

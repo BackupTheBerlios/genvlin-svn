@@ -1,0 +1,4 @@
+import de.genvlin.core.plugin.Log;
+
+Log.log("5! = "+factorial(5,5),true);
+Log.log("5*4*3 = "+factorial(5,3),true);

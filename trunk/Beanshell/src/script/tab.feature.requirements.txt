@@ -1,0 +1,28 @@
+-------------------------------------------
+OLD:
+
+error:
+	jFrh
+packages:
+	java.util.
+	java.u
+classes:
+	JFr
+	JFrame
+objects:
+	gFr
+
+
+-------------------------------------------
+NEW:
+
+error:
+	better messages
+
+methods/variables:
+	gFrame.
+
+constructors:
+	GFrame.
+
+setNameCompletionAttributes(int maxResults, int modifiers, boolean printAllModifiers)

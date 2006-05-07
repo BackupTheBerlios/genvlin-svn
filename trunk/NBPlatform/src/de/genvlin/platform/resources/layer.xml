@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="Tools">
+            <file name="de-genvlin-platform-gui-ImportAction.instance">
+                <attr name="instanceClass" stringvalue="de.genvlin.platform.gui.ImportAction"/>
+            </file>            
+        </folder>
+    </folder>
+    <folder name="Loaders">
+        <folder name="text">
+            <folder name="x-genvlin-table">
+                <folder name="Actions">
+                    <file name="de-genvlin-platform-gui-ImportAction.shadow">
+                        <attr name="originalFile" stringvalue="Actions/Tools/de-genvlin-platform-gui-ImportAction.instance"/>
+                    </file>
+                    <attr name="de-genvlin-platform-gui-ImportAction.shadow/OpenAction.instance" boolvalue="true"/>
+                    <attr name="de-genvlin-platform-gui-ImportAction.shadow/PropertiesAction.instance" boolvalue="true"/>
+                    <attr name="de-genvlin-platform-gui-ImportAction.shadow/org-openide-actions-EditAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-EditAction.instance" url="org-openide-actions-EditAction.instance"/>
+                    <attr name="org-openide-actions-EditAction.instance/PropertiesAction.instance" boolvalue="true"/>
+                    <file name="PropertiesAction.instance" url="PropertiesAction.instance">
+                        <attr name="instanceClass" stringvalue="org.openide.actions.PropertiesAction"/>
+                    </file>
+                </folder>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="File">
+            <file name="de-genvlin-platform-gui-ImportAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Tools/de-genvlin-platform-gui-ImportAction.instance"/>
+            </file>
+            <attr name="de-genvlin-platform-gui-ImportAction.shadow/org-netbeans-modules-openfile-OpenFileAction.instance" boolvalue="true"/>
+            <attr name="de-genvlin-platform-gui-ImportAction.shadow/org-openide-actions-SaveAction.instance" boolvalue="true"/>
+        </folder>
+    </folder>
+    <folder name="Services">
+        <folder name="MIMEResolver">
+            <file name="TableMimeResolver.xml" url="TableMimeResolver.xml">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="de.genvlin.platform.resources.Bundle"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Templates">
+        <folder name="Other">
+            <file name="TableTemplate.txt" url="TableTemplate.txt"/>
+        </folder>
+    </folder>
+    <folder name="Windows2">
+        <folder name="Modes">
+            <folder name="explorer">
+                <file name="favorites.wstcref" url="favoritesWstcref.xml"/>
+                <file name="poolExplorer.wstcref" url="poolExplorerWstcref.xml"/>
+                <file name="projectTabLogical_tc.wstcref_hidden"/>
+                <file name="projectTab_tc.wstcref_hidden"/>
+                <file name="runtime.wstcref_hidden"/>
+            </folder>
+            <folder name="navigator">
+                <file name="navigatorTC.wstcref" url="navigatorTCWstcref.xml"/>
+            </folder>
+            <folder name="output">
+                <file name="output.wstcref" url="outputWstcref.xml"/>
+            </folder>
+        </folder>
+    </folder>       
+</filesystem>

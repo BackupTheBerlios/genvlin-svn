@@ -1,0 +1,6 @@
+import de.genvlin.core.data.IntID;
+import de.genvlin.core.data.MainPool;
+
+public Object obj(int n){
+        return MainPool.getDefault().get(new IntID(n));
+}
