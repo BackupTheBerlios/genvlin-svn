@@ -20,9 +20,40 @@
                     <attr name="de-genvlin-platform-gui-ImportAction.shadow/org-openide-actions-EditAction.instance" boolvalue="true"/>
                     <file name="org-openide-actions-EditAction.instance" url="org-openide-actions-EditAction.instance"/>
                     <attr name="org-openide-actions-EditAction.instance/PropertiesAction.instance" boolvalue="true"/>
+                    <attr name="org-openide-actions-EditAction.instance/org-openide-actions-FileSystemAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-FileSystemAction.instance" url="org-openide-actions-FileSystemAction.instance"/>
+                    <attr name="org-openide-actions-FileSystemAction.instance/PropertiesAction.instance" boolvalue="true"/>
                     <file name="PropertiesAction.instance" url="PropertiesAction.instance">
                         <attr name="instanceClass" stringvalue="org.openide.actions.PropertiesAction"/>
                     </file>
+                    <attr name="PropertiesAction.instance/sep-1.instance" boolvalue="false"/>
+                    <attr name="org-openide-actions-FileSystemAction.instance/sep-1.instance" boolvalue="true"/>
+                    <file name="sep-1.instance" url="sep-1.instance">
+                        <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                    </file>
+                    <attr name="sep-1.instance/org-openide-actions-CopyAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-CopyAction.instance" url="org-openide-actions-CopyAction.instance"/>
+                    <attr name="org-openide-actions-CopyAction.instance/org-openide-actions-CutAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-CutAction.instance" url="org-openide-actions-CutAction.instance"/>
+                    <attr name="org-openide-actions-CutAction.instance/sep-2.instance" boolvalue="true"/>
+                    <file name="sep-2.instance" url="sep-2.instance">
+                        <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                    </file>
+                    <attr name="sep-2.instance/org-openide-actions-DeleteAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-DeleteAction.instance" url="org-openide-actions-DeleteAction.instance"/>
+                    <attr name="org-openide-actions-DeleteAction.instance/org-openide-actions-RenameAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-RenameAction.instance" url="org-openide-actions-RenameAction.instance"/>
+                    <attr name="org-openide-actions-RenameAction.instance/org-openide-actions-SaveAsTemplateAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-SaveAsTemplateAction.instance" url="org-openide-actions-SaveAsTemplateAction.instance"/>
+                    <attr name="org-openide-actions-SaveAsTemplateAction.instance/sep-3.instance" boolvalue="true"/>
+                    <file name="sep-3.instance" url="sep-3.instance">
+                        <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+                    </file>
+                    <attr name="sep-3.instance/org-openide-actions-ToolsAction.instance" boolvalue="true"/>
+                    <file name="org-openide-actions-ToolsAction.instance" url="org-openide-actions-ToolsAction.instance"/>
+                    <attr name="sep-3.instance/PropertiesAction.instance" boolvalue="true"/>
+                    <attr name="PropertiesAction.instance/org-openide-actions-ToolsAction.instance" boolvalue="false"/>
+                    <attr name="org-openide-actions-ToolsAction.instance/PropertiesAction.instance" boolvalue="true"/>
                 </folder>
             </folder>
         </folder>

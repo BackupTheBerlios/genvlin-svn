@@ -64,7 +64,7 @@ class DataVector extends AbstractCollection
         if(getAL().remove(index) == null) return false;
         
         //TODO expensive:
-        //fireEvent(AbstractCollection.CHANGE_DATA, index, index);
+        //fireEvent(AbstractCollection.REMOVE_DATA, index, index);
         return true;
     }
     
@@ -88,9 +88,9 @@ class DataVector extends AbstractCollection
     }
     
     public boolean add(Number n) {
-        //TODO expensive:
-        //fireEvent(AbstractCollection.CHANGE_DATA, );
         return getAL().add(n);
+        //TODO expensive:
+        //fireEvent(AbstractCollection.ADD_DATA, size(), size());        
     }
     
     public Number get(int i) {
@@ -98,8 +98,8 @@ class DataVector extends AbstractCollection
     }
     
     public Number set(int i, Number n) {
-        //TODO expensive:
-        //fireEvent(AbstractCollection.CHANGE_DATA, i,i);
         return (Number)getAL().set(i,n);
+        //TODO expensive:
+        //fireEvent(AbstractCollection.ADD_DATA, i,i);        
     }
 }

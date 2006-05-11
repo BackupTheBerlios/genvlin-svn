@@ -24,6 +24,10 @@
 
 package de.genvlin.core.util;
 
+import de.genvlin.core.data.CollectionEvent;
+import de.genvlin.core.data.CollectionListener;
+import de.genvlin.core.data.IntID;
+import de.genvlin.core.data.VectorInterface;
 import de.genvlin.core.data.VectorPool;
 import de.genvlin.core.plugin.Log;
 import de.genvlin.gui.table.GTableModel;
@@ -102,7 +106,7 @@ public class ImportTask extends GTask {
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
         tableModel = new GTableModel();
         //update!
-        tableModel.setColSep(sep);
+        tableModel.setColSep(sep);        
         
         try{
             int row = 0;
@@ -114,7 +118,6 @@ public class ImportTask extends GTask {
                 if(line.trim().startsWith("//")) continue;
                 
                 columns = line.split(sep);
-                
                 tableModel.setRow(row, columns);
                 //the first time (row==0) indicates start event
                 if(row % 500 == 0) {

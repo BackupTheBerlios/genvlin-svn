@@ -104,18 +104,18 @@ public class GTableModel extends AbstractTableModel
         importColSeparator = globalColSeparator;
         importLineSeparator = globalLineSeparator;
         
-        set(pool);
-        numberFormat = (NumberFormat)GProperties.getDefault().get("numberformat");
         DEFAULT_ROWS = ((Integer)GProperties.getDefault().get("table.defaultrows")).intValue();
         DEFAULT_COLS = ((Integer)GProperties.getDefault().get("table.defaultcols")).intValue();
-        setValueAt("", DEFAULT_ROWS-1, DEFAULT_COLS-1);//minus one, cause of size=row-1!!
+        set(pool);
+        
+        numberFormat = (NumberFormat)GProperties.getDefault().get("numberformat");
         update();//really necessary?
         
     }
     
     /** Creates a new instance of GTabelModel */
     public GTableModel() {
-        this((VectorPool)MainPool.getDefault().create(VectorPool.class));
+        this(null);
     }
     
 /*    public void enableSeparatorAutomaticUpdate(boolean update) {
@@ -184,15 +184,29 @@ public class GTableModel extends AbstractTableModel
         return data;
     }
     
+    /**
+     * This method will initialise the table with data.<br>
+     * If specified pool is <tt>null</tt> nothing happens if
+     * the data already has values. Otherwise (data==<tt>null</tt>) 
+     * this method will create a default pool with default row and col sizes.     
+     */
     public void set(VectorPool pool) {
-        data = pool;
-        maxRowCount = 0;
-        int tmpSize;
-        for(int i=0; i<pool.size(); i++) {
-            tmpSize = ((VectorInterface)pool.get(i)).size();
-            if(tmpSize > maxRowCount)
-                maxRowCount = tmpSize;
+        if(pool == null) {
+            if(data == null) {
+                data = (VectorPool)MainPool.getDefault().create(VectorPool.class);
+                setValueAt("", DEFAULT_ROWS-1, DEFAULT_COLS-1);//minus one, cause of size=row-1!!
+            }
+        } else {
+            data = pool;
+            maxRowCount = 0;
+            int tmpSize;
+            for(int i=0; i<pool.size(); i++) {
+                tmpSize = ((VectorInterface)pool.get(i)).size();
+                if(tmpSize > maxRowCount)
+                    maxRowCount = tmpSize;
+            }
         }
+        
         update();
     }
     
@@ -399,8 +413,7 @@ public class GTableModel extends AbstractTableModel
                     
                     if(cols+1 < allCols.length)//append to all, but the last col
                         sb.append(globalColSeparator);
-                }
-                catch(Exception exc) {//catch Parse + NullPointerException
+                } catch(Exception exc) {//catch Parse + NullPointerException
                     Log.err(exc, false);
                     sb.append(globalColSeparator);
                 }
@@ -416,7 +429,7 @@ public class GTableModel extends AbstractTableModel
      * colInd[1] as y.
      * If(colInd.length > 2) the next XYInterface will get "column with index
      * colInd[2]" as y and colInd[0] as x.
-     * 
+     *
      * The indicies has to be the model indicies!
      * This would be a reference, not a deep copy!
      * TODO rowInd[] is not yet implemented! may be we only need a range?
@@ -618,7 +631,7 @@ public class GTableModel extends AbstractTableModel
     public int size() {
         return data.size();
     }
-
+    
 //    public boolean add(Comparable id) {
 //        return data.add(id);    }
 }

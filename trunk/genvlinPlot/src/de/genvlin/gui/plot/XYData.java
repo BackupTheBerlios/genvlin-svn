@@ -67,12 +67,14 @@ public class XYData extends AbstractCollection
     private Color color;
     
     private int type = DOT;
+    
     /**
      * specifies how big the dots should be
      */
-    private int size = 4;
+    private int size = 2;
     
-    /** The name of the data collection
+    /**
+     * The name of the data collection
      */
     private String name;
     

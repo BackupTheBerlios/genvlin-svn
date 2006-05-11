@@ -1,0 +1,6 @@
+import de.genvlin.core.plugin.Log;
+
+
+public void log(Object o){
+   Log.log(o.toString(), true);
+}

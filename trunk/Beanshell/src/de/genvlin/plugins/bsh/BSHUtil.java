@@ -44,7 +44,7 @@ public class BSHUtil implements ScriptPlugin {
     static BSHUtil util;
     
     /** Creates a new instance of BSHUtil */
-    public BSHUtil() {
+    private BSHUtil() {
     }
     
     private Interpreter getInterpreter() {

@@ -1,0 +1,6 @@
+import de.genvlin.core.util.*;
+
+Locale loc = Locale.UK;
+//may be you want: Locale loc = Locale.getDefault();
+//or Locale.FRANCE, Locale.GERMANY
+GProperties.getDefault().put("locale", loc);

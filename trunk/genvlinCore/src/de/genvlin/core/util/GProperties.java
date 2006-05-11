@@ -24,6 +24,7 @@
 
 package de.genvlin.core.util;
 
+import de.genvlin.core.plugin.Log;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Locale;
 
 /** This class holds all necessary information to store main things.
@@ -95,7 +97,7 @@ public class GProperties {
         return data;
     }
     
-    /** This method creates a default Hashtable for usage in GProperties 
+    /** This method creates a default Hashtable for usage in GProperties
      * constructor.
      */
     static protected Hashtable createDefault() {
@@ -134,7 +136,7 @@ public class GProperties {
         
         return dData;
     }
-       
+    
     Font tmpFont;
     
     /** This method writes the current properties to a String. This string could be invoked
@@ -234,7 +236,7 @@ public class GProperties {
     static public String i(int i) {
         return ""+i;
     }
-       
+    
     /** This method sets a specific value to key.
      * Available keys: font (Font), font.error (Font), folder.project (File),
      * folder.import (File), separator.col (String),
@@ -249,15 +251,15 @@ public class GProperties {
      */
     public Object put(String key, Object value) {
         //todo: how to make put() type-secure? works the following?
-        //if(data.get(key).getClass().isInstance(value)) 
-            
+        //if(data.get(key).getClass().isInstance(value))
+        
         //if somebody changes locale this has effects on numberformat
         if(key.equals("locale")) {
             try {
                 NumberFormat nf = NumberFormat.getNumberInstance((Locale)value);
                 _put("numberformat", nf);
             } catch(ClassCastException exc) {
-                throw new Error("GProperties.put: Value of locale should be from class Locale!");
+                Log.log("GProperties.put: Value of locale should be from class Locale!", false);
             }
         }
         //if somebody make changes on font -> font.error.size will changed too!
@@ -270,8 +272,7 @@ public class GProperties {
         return _put(key, value);
     }
     
-    private Object _put(String key, Object value)
-    {
+    private Object _put(String key, Object value) {
         firePropertyChanged(key, get(key), value);
         return data.put(key, value);
     }
@@ -314,12 +315,12 @@ public class GProperties {
      */
     private void firePropertyChanged(String propName, Object oldVal,
             Object newVal) {
-        HashSet pcl = getListeners();
-        PropertyChangeEvent pce = 
+        Iterator iter = getListeners().iterator();
+        PropertyChangeEvent pce =
                 new PropertyChangeEvent(this, propName, oldVal, newVal);
         
-        for(int i=0; i<pcl.size(); i++) {
-            ((PropertyChangeListener)pcl).propertyChange(pce);
+        while(iter.hasNext()) {
+            ((PropertyChangeListener)iter.next()).propertyChange(pce);
         }
     }
 }

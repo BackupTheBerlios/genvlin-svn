@@ -659,7 +659,7 @@ public class GTablePanel implements ClipboardOwner {
     protected StringBuffer getSelected() {
         int cols[]=getSelectedColumns();
         int rows[]=getSelectedRows();
-        
+        viewIndiciesToModel(cols);
         return getModel().get(rows, cols);
     }
     

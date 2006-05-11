@@ -52,9 +52,10 @@ public class RegressionLineTest extends TestCase {
         
         delta = 1e-8;
         
-        assertEquals(0.355, rl.getNError(), delta);        
-        assertEquals(6e-4, rl.getMError(), delta);        
-        assertEquals(0.99999978, rl.getCorrelationCoeff(), delta);         
+        assertEquals(0.14575771049415684, rl.getVariance(), delta);        
+        assertEquals(0.0005993649209, rl.getMError(), delta);        
+        assertEquals(0.3545574079, rl.getNError(), delta);        
+        assertEquals(0.9999997792, rl.getCorrelationCoeff(), delta);         
     }
     
     /**

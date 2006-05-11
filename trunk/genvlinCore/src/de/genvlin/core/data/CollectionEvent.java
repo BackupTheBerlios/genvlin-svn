@@ -111,4 +111,9 @@ public class CollectionEvent extends java.util.EventObject {
     public ID getID() {
         return id;
     }
+
+    public String toString() {
+        return "CollectionEvent:[id="+id+"; from="+from+"; to="+to
+                +"; source="+source+"; property="+propName+";]";
+    }
 }

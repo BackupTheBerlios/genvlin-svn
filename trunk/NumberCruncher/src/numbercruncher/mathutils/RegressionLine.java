@@ -21,8 +21,8 @@ public class RegressionLine {
     /** number of data points */        private int     counts;
     /** true if coefficients valid */   private boolean coefsValid;
     
-    /* delta == varianz*/ private double delta;
-     
+    /* delta*delta == variance*/ private double delta;
+    
     /**
      * Constructor.
      */
@@ -42,14 +42,22 @@ public class RegressionLine {
      * Add a new data point: Update the sums.
      * @param dataPoint the new data point
      */
-    public void addDataPoint(DataPoint dataPoint) {
-        sumX  += dataPoint.x;
-        sumY  += dataPoint.y;
-        sumXX += dataPoint.x*dataPoint.x;
-        sumXY += dataPoint.x*dataPoint.y;
-        sumYY += dataPoint.y*dataPoint.y;
+    public boolean addDataPoint(DataPoint dataPoint) {
+        return addDataPoint(dataPoint.x, dataPoint.y);
+    }    
+    
+    public boolean addDataPoint(double x, double y) {
+        if(Double.isNaN(x) || Double.isNaN(y)) 
+            return false;
+            
+        sumX  += x;
+        sumY  += y;
+        sumXX += x*x;
+        sumXY += x*y;
+        sumYY += y*y;
         ++counts;
-        coefsValid = false;
+        coefsValid = false;        
+        return true;
     }
     
     /**
@@ -84,11 +92,12 @@ public class RegressionLine {
     }
     public double getNError() {
         validateCoefficients();
-        return delta/Math.sqrt(sumXX/counts/(sumXX - sumX*sumX/counts));
+        return delta*Math.sqrt(sumXX/counts/(sumXX - sumX*sumX/counts));
     }
     public double getCorrelationCoeff() {
-        validateCoefficients();
-        return 0;
+        validateCoefficients();        
+        return (sumXY-sumX*sumY/counts)/
+                Math.sqrt((sumXX-sumX*sumX/counts)*(sumYY-sumY*sumY/counts));
     }
     
     
@@ -120,7 +129,10 @@ public class RegressionLine {
      * Return the sum of the y*y values.
      * @return the sum
      */
-    public double getSumYY() { return sumYY; }        
+    public double getSumYY() { return sumYY; }
+    
+    public double getVariance() { return delta*delta; }
+    
     
     /**
      * Return the value of the regression line function at x.
@@ -156,9 +168,9 @@ public class RegressionLine {
             m = (double) ((counts*sumXY - sumX*sumY)/(counts*sumXX - sumX*sumX));
             n = (double) ((sumY*sumXX/counts - sumX*sumXY/counts)/(sumXX - sumX*sumX/counts));
             //delta^2 = SUM((y_i - yBar_i)^2); where yBar_i = at(x_i);
-            //=> delta^2 = SUM( y_i^2 - 2*(y_i*m*x_i + y_i*n) + ((m*x_i)^2 + 2*m*x_i*n + n^2))
-            delta = Math.sqrt((sumYY - 2*(m*sumXY + n*sumY) 
-            + (m*m*sumXX + 2*m*n*sumX + n*n*counts*(counts+1)/2))/(counts-1));
+            //=> delta^2 = SUM( y_i^2 - 2*(y_i*m*x_i + y_i*n) + ((m*x_i)^2 + 2*m*x_i*n + n^2*counts))
+            delta = Math.sqrt((sumYY - 2*(m*sumXY + n*sumY)
+            + m*m*sumXX + 2*m*n*sumX + n*n*counts)/(counts-1));
         } else {
             n = m = Double.NaN;
         }

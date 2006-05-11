@@ -65,12 +65,11 @@ public class GenvlinFitEngine implements FitPlugin, ActionListener {
     
     public Function fit(XYInterface xyVector) {
         RegressionLine line = new RegressionLine();
-        float tmpX, tmpY;
+        double tmpX, tmpY;
         for(int i=0; i < xyVector.size(); i++)            {
-            tmpX=xyVector.getX(i).floatValue();
-            tmpY=xyVector.getY(i).floatValue();
-            if(tmpY != Float.NaN && tmpY != Float.NaN)
-                line.addDataPoint(new DataPoint(tmpX,tmpY));
+            tmpX=xyVector.getXDouble(i);
+            tmpY=xyVector.getYDouble(i);
+            line.addDataPoint(tmpX, tmpY);
         }
         
         LinearFunction lf = (LinearFunction)MainPool.getDefault().create(LinearFunction.class);
@@ -79,6 +78,10 @@ public class GenvlinFitEngine implements FitPlugin, ActionListener {
         lf.setRange(xyVector.getMinX(), xyVector.getMinY(),
                 xyVector.getMaxX(), xyVector.getMaxY());
         Log.log("\n"+lf.toString(), true);
+        Log.log("r="+line.getCorrelationCoeff(), true);
+        Log.log("y = mx+n; err(m)="+line.getMError()+"; err(n)="
+                +line.getNError(), true);
+        
         return lf;
     }
     
