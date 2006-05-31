@@ -18,7 +18,7 @@
 \addtocounter{footnote}{2}
 \pagestyle{empty}
 %---------------------------title page-----------------------------------------
-\title{ \bf \LARGE The Developer Guide For \\[1cm] genvlin\\[1cm] Documentversion: 1}
+\title{ \bf \LARGE The Developer Guide For \\[1cm] genvlin\\[1cm] Documentversion: 1\\TODO: Some things are not reviewed!!}
 \author{Peter Karich \footnote{created with \LaTeX{}.}}
 \date{Bayreuth, the \today}
 \maketitle
@@ -41,13 +41,13 @@ ALWAYS BE SURE you do not harm the following rules:
 \end{enumerate}
 Actually I violate rule no. \ref{2}, but you can help me!
 \section{Open Questions}
-Here you are a list of very important todo tasks. Please see todo.txt -list on genvlins webpage(Developer Zone).
+Here you are a list of very important todo tasks. Additionally see the todo.txt file - a list available on genvlins webpage (Developer Zone).
 \subsection{Solve The Serialization Problems In TopComponent}
 I don't really understand ... :-(\\
 read/writeExternal and writeReplace/readResolve and write/writeObject?? See Serializable and Externalizable for more information!\\
 And how to add the serialVersionID to every class! It should be automatically! Does anybody has some scripts?\\
 I know a script (addSerialVer.pl) from the netbeans-feedreader example!
-And I know the project from sourceforge! But how does it work!\\
+And I know the project from sourceforge! But how do they work?\\
 \subsection{Solve The Plot Into Problem!}
 Each time the user presses on a "plot-menuitem" (e.g. JFreeChart$\rightarrow$XYLineChart) the action should be stored as "defaultplot-menuitem" so the user can faster plot. The default plot should {\bf add} the XYVector
 to the "default-plotpanel" and activate this panel (no new panel!!).\\

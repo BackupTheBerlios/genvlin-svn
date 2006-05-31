@@ -1,7 +1,5 @@
 package numbercruncher.matrix;
 
-import numbercruncher.mathutils.Epsilon;
-
 /**
  * A matrix that can be inverted.  Also, compute its determinant,
  * norm, and condition number.

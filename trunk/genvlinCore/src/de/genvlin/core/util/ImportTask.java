@@ -24,10 +24,6 @@
 
 package de.genvlin.core.util;
 
-import de.genvlin.core.data.CollectionEvent;
-import de.genvlin.core.data.CollectionListener;
-import de.genvlin.core.data.IntID;
-import de.genvlin.core.data.VectorInterface;
 import de.genvlin.core.data.VectorPool;
 import de.genvlin.core.plugin.Log;
 import de.genvlin.gui.table.GTableModel;

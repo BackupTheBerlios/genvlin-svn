@@ -24,7 +24,6 @@
 
 package de.genvlin.platform.gui;
 
-import de.genvlin.core.plugin.PluginPool;
 import java.io.IOException;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObjectExistsException;

@@ -34,19 +34,26 @@ import org.openide.filesystems.FileLock;
 import org.openide.filesystems.FileObject;
 import org.openide.text.DataEditorSupport;
 import org.openide.windows.CloneableOpenSupport;
+import org.openide.windows.CloneableTopComponent;
 
 /**
  * This class provides the special buttons for bsh script windows:
  * run, save
  * @author Peter Karich
  */
-public class BSHDataEditorSupport extends DataEditorSupport 
-        implements EditorCookie, EditCookie, 
+public class BSHDataEditorSupport extends DataEditorSupport
+        implements EditorCookie, EditCookie,
         ViewCookie, PrintCookie, CloseCookie {
     
     BSHDataEditorSupport(BSHDataObject bdo) {
-        super(bdo, new BSHEnv(bdo));        
-    }  
+        super(bdo, new BSHEnv(bdo));
+    }
+    
+    protected CloneableTopComponent createCloneableTopComponent() {
+        CloneableTopComponent ctc = super.createCloneableTopComponent();
+        ctc.availableModes(null);
+        return ctc;
+    }
     
     static private class BSHEnv extends DataEditorSupport.Env {
         public BSHEnv(BSHDataObject bdo) {

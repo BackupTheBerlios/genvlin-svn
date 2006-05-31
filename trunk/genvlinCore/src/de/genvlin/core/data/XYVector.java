@@ -60,7 +60,7 @@ class XYVector extends AbstractCollection
         if(size()== 0)
             return Double.POSITIVE_INFINITY;
         
-        //return ((Double)Collections.max(xyVector.getX())).doubleValue();
+        //return ((Number)Collections.max(xyVector.getX())).doubleValue();
         double ret = Double.NEGATIVE_INFINITY;
         for(int i=0; i < getX().size(); i++) {
             n = getX(i);

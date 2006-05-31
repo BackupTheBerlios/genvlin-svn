@@ -24,7 +24,6 @@
 
 package de.genvlin.platform.gui;
 
-import de.genvlin.core.data.VectorPool;
 import de.genvlin.core.plugin.Log;
 import de.genvlin.gui.table.GTablePanel;
 import de.genvlin.gui.util.ImportFilePanel;
@@ -169,30 +168,30 @@ public class TableTopComponent extends CloneableTopComponent
     //to provide docking anywhere:
     public List availableModes(List modes) {
         return null;
-    }
-    
+    }    
     
     //ObjectInputStream ois.defaultReadObject ();
     public void readExternal(ObjectInput oi) throws IOException, ClassNotFoundException {
-        /*super.readExternal(oi);//nothing should happen we want only the dialog at the shutdown        
-        entry = (MultiDataObject.Entry)oi.readObject();
+        super.readExternal(oi);
+        /*entry = (MultiDataObject.Entry)oi.readObject();
         init(new GTablePanel((VectorPool)oi.readObject()));*/
     }
     
     public void writeExternal(ObjectOutput oo) throws java.io.IOException {
-        /*IF THIS super.writeExternal(oo);
-        oo.writeObject(entry);
+        super.writeExternal(oo);
+        /*oo.writeObject(entry);
         if(tCookie.isValid())
             //storing table.getModel() will fail, cause of missing serialVersionUID's in AbstractTableModel, etc.!!!???
             oo.writeObject(tCookie.getPool());
-         WORKS THEN FOLLOWING WORKS NOT????
-        */
-        SaveCookie c = (SaveCookie)dObj.getCookie(SaveCookie.class);
-        if(c!=null) {
-            try{
-                c.save();
-            } catch(IOException ioe) {
-                Log.log("Saving failed!("+ioe.getMessage()+")", true);
+         */
+        if(dObj!=null) {
+            SaveCookie c = (SaveCookie)dObj.getCookie(SaveCookie.class);
+            if(c!=null) {
+                try{
+                    c.save();
+                } catch(IOException ioe) {
+                    Log.log("Saving failed!("+ioe.getMessage()+")", true);
+                }
             }
         }
     }
@@ -207,43 +206,6 @@ public class TableTopComponent extends CloneableTopComponent
         return ok;
     }
     
-    /**
-     * Obtain the TableTopComponent instance. Never call {@link #getDefault} directly!
-     *
-     public static synchronized TableTopComponent findInstance()
-     {
-     TopComponent win = WindowManager.getDefault().findTopComponent(PREFERRED_ID);
-     if (win == null)
-     {
-     Log.log("Cannot find Table component. It will not be located properly in the window system.", false);
-     return getDefault();
-     }
-     if (win instanceof TableTopComponent)
-     {
-     return (TableTopComponent)win;
-     }
-     ErrorManager.getDefault().log(ErrorManager.WARNING, "There seem to be multiple components with the '" + PREFERRED_ID + "' ID. That is a potential source of errors and unexpected behavior.");
-     return getDefault();
-     }
-     *
-     // replaces this in object stream
-     public Object writeReplace() {
-     return new ResolvableHelper(entry);
-     }
-     
-     final class ResolvableHelper implements Serializable {
-     MultiDataObject.Entry entry;
-     
-     public ResolvableHelper(MultiDataObject.Entry entry) {
-     this.entry = entry;
-     }
-     
-     private static final long serialVersionUID = 1L;
-     public Object readResolve() {
-     return new TableTopComponent(entry);
-     }
-     }
-     */
     public int getPersistenceType() {
         return TopComponent.PERSISTENCE_ONLY_OPENED;//PERSISTENCE_NEVER//
     }

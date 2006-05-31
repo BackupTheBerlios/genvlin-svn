@@ -24,6 +24,7 @@
 
 package de.genvlin.gui.table;
 
+import de.genvlin.core.data.CollectionEvent;
 import de.genvlin.core.data.CollectionListener;
 import de.genvlin.core.data.PoolInterface;
 import de.genvlin.core.util.GProperties;
@@ -57,7 +58,8 @@ import javax.swing.table.*;
  * @author Peter Karich
  */
 public class GTableModel extends AbstractTableModel
-        implements PropertyChangeListener, PoolInterface {
+        implements PoolInterface, PropertyChangeListener,
+        CollectionListener {
     static final long serialVersionUID = 432233241L;
     
     /** This variable contains the columns. */
@@ -87,8 +89,13 @@ public class GTableModel extends AbstractTableModel
     /** This method constructs a new tablemodel with rows, cols
      */
     public GTableModel(int rowIndex, int columnIndex) {
-        this();
+        this(null);
         setValueAt(null, rowIndex, columnIndex);
+    }
+    
+    /** Creates a new instance of GTabelModel */
+    public GTableModel() {
+        this(null);
     }
     
     public GTableModel(VectorPool pool) {
@@ -110,12 +117,6 @@ public class GTableModel extends AbstractTableModel
         
         numberFormat = (NumberFormat)GProperties.getDefault().get("numberformat");
         update();//really necessary?
-        
-    }
-    
-    /** Creates a new instance of GTabelModel */
-    public GTableModel() {
-        this(null);
     }
     
 /*    public void enableSeparatorAutomaticUpdate(boolean update) {
@@ -187,8 +188,8 @@ public class GTableModel extends AbstractTableModel
     /**
      * This method will initialise the table with data.<br>
      * If specified pool is <tt>null</tt> nothing happens if
-     * the data already has values. Otherwise (data==<tt>null</tt>) 
-     * this method will create a default pool with default row and col sizes.     
+     * the data already has values. Otherwise (data==<tt>null</tt>)
+     * this method will create a default pool with default row and col sizes.
      */
     public void set(VectorPool pool) {
         if(pool == null) {
@@ -208,6 +209,7 @@ public class GTableModel extends AbstractTableModel
         }
         
         update();
+        addVectorListener(this);
     }
     
     /** This method sets the title of a column (the second part).
@@ -345,6 +347,10 @@ public class GTableModel extends AbstractTableModel
     
     public void update() {
         fireTableStructureChanged();
+        
+        for(int i=0; i < data.size(); i++) {
+            maxRowCount = Math.max(maxRowCount, ((VectorInterface)data.get(i)).size());
+        }
         fireTableCellUpdated(getRowCount(), getColumnCount());
     }
     
@@ -617,7 +623,7 @@ public class GTableModel extends AbstractTableModel
     }
     
     public void addVectorListener(CollectionListener vl) {
-        data.removeVectorListener(vl);
+        data.addVectorListener(vl);
     }
     
     public void setInfo(String info) {
@@ -632,6 +638,7 @@ public class GTableModel extends AbstractTableModel
         return data.size();
     }
     
-//    public boolean add(Comparable id) {
-//        return data.add(id);    }
+    public void vectorChanged(CollectionEvent ve) {
+        update();
+    }
 }

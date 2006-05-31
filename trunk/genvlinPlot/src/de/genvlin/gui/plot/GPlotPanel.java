@@ -39,7 +39,6 @@ import de.genvlin.core.plugin.Platform;
 import de.genvlin.core.plugin.PluginPool;
 import de.genvlin.gui.util.GMouseAdapter;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.io.Serializable;
@@ -98,7 +97,7 @@ public class GPlotPanel extends JPanel
         setName("plot:"+pool.getID());
         setToolTipText("<html>Measure distance per Mouse dragging.<br>" +
                 "Zoom with SHIFT + drag.<br>Translate with CTRL + drag.</html>");
-        setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
+        //setCursor(new Cursor(Cursor.CROSSHAIR_CURSOR));
         cSys = getDefaultCoordinateSystem();
         cSys.setColor(axesColor);
         cSys.setBackground(background);
@@ -238,14 +237,22 @@ public class GPlotPanel extends JPanel
     public void removeData(int i) {
         pool.remove(i);
     }
+
+    int xOff, yOff;
     
     /** This method plots all datatables to the window.
      * todo: performance!!!
      */
     private void plotData(Graphics g) {
+        xOff = cSys.getYAxis().getXOffset();
+        yOff = cSys.getXAxis().getYOffset();
+        g.setClip(xOff, yOff, cSys.winWidth() - 2*xOff, cSys.winHeight() - 2*yOff);
+        
         for(int c=0; c<pool.size(); c++) {
             ((XYData)pool.get(c)).draw(g, cSys);
         }
+        //reset clipping area:
+        g.setClip(0,0,cSys.winWidth(), cSys.winHeight());        
     }
     
     double xTranslate =1, yTranslate=1;

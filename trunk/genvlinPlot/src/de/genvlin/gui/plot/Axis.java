@@ -17,19 +17,19 @@ import java.io.Serializable;
  * Axisinfos: their scalers: no. + size.
  * @author Peter Karich
  */
-public class Axis implements Serializable
-{
+public class Axis implements Serializable {
     public static final int //TOP =3, DOWN = 4, LEFT = 5, RIGHT = 6,
-    // POS_X = 7, NEG_X = 8, POS_Y = 9, NEG_Y = 10;
-    X = 0, Y = 1;
+            // POS_X = 7, NEG_X = 8, POS_Y = 9, NEG_Y = 10;
+            X = 0, Y = 1;
     
     private int type;
     private CoordinateSystem cSys;
     
-    /** offset of origin= startpoint of axis in Window coord
+    /** offset of origin= startpoint of axis in Window coord.
+     * (Warning: CoordinateSystem.x/yOff is the math offset!)
      */
-    static private int xOffset = 50;
-    static private int yOffset = 50;
+    static int xOffset = 50;
+    static int yOffset = 50;
     
     /** offset for description of x axis in Window coord
      */
@@ -54,8 +54,7 @@ public class Axis implements Serializable
      * @param noOfScalers how many scaler shall be on this axis
      * @param cSys on which coordinate system we scale the axis
      */
-    public Axis(int type, int noOfScalers, CoordinateSystem cSys)
-    {
+    public Axis(int type, int noOfScalers, CoordinateSystem cSys) {
         this.type = type;
         this.cSys = cSys;
         this.noOfScalers = noOfScalers;
@@ -64,32 +63,27 @@ public class Axis implements Serializable
     /**
      * @return one of Axis.X or Axis.Y
      */
-    public int getType()
-    {
+    public int getType() {
         return type;
     }
     
     /** This method returns the x offset of the origin
      */
-    static public int getXOffset()
-    {
+    public int getXOffset() {
         return xOffset;
     }
     
     /** This method returns the y offset of the origin
      */
-    static public int getYOffset()
-    {
+    public int getYOffset() {
         return yOffset;
     }
     
     /**
      * return the startpoint of axis in window coord
      */
-    public Point getStartPoint()
-    {
-        switch(type)
-        {
+    public Point getStartPoint() {
+        switch(type) {
             case X:  return new Point(0+ getXOffset(),cSys.winHeight()-getYOffset());
             //case Y:
             default: return new Point(0+ getXOffset(),cSys.winHeight()-getYOffset());
@@ -98,10 +92,8 @@ public class Axis implements Serializable
     
     /** return the endpoint of axis in window coord
      */
-    public Point getEndPoint()
-    {
-        switch(type)
-        {
+    public Point getEndPoint() {
+        switch(type) {
             case X:  return new Point(cSys.winWidth() -getXOffset(), cSys.winHeight()-getYOffset());
             default: return new Point(0+getXOffset(), 0+getYOffset());//NEG_Y
         }
@@ -114,8 +106,7 @@ public class Axis implements Serializable
      *
      * @param no contains the number of scalers which should be on the axis.
      */
-    protected double getRounded(double old, double closestNumber)
-    {
+    protected double getRounded(double old, double closestNumber) {
         //number of important digist
         long s = (long)Math.floor(Math.log(closestNumber)/Math.log(10));
         //(floor returns the largest double to argument, but not greater than the arg.)
@@ -129,8 +120,7 @@ public class Axis implements Serializable
      * This method draws the axis line and its scalers in respect to
      * the actual properties of CoordinateSystem
      */
-    public void draw(Graphics g)
-    {
+    public void draw(Graphics g) {
         Point s=getStartPoint(), e= getEndPoint();
         
         drawScalers(g, s, e);
@@ -140,20 +130,17 @@ public class Axis implements Serializable
     /** This method draw the scalers + its text<p>
      * If you want to actualize : call automaticScale(newcoordinatebounds).
      */
-    public void drawScalers(Graphics g, Point start, Point end)
-    {
+    public void drawScalers(Graphics g, Point start, Point end) {
         double tmp, roundedDist;
         
-        switch(getType())
-        {
+        switch(getType()) {
             case Axis.X:
                 
                 double xMath = cSys.xToMath(start.x);
                 double xEndMath = cSys.xToMath(end.x);
                 
                 //make sure that start<end =>direction is not important for scalers
-                if(xMath > xEndMath)
-                {
+                if(xMath > xEndMath) {
                     tmp = xEndMath; xEndMath = xMath; xMath = tmp;
                 }
                 int xWin;
@@ -167,11 +154,10 @@ public class Axis implements Serializable
                 roundedDist = getRounded(roundedDist, roundedDist);
                 xMath = getRounded(xMath, roundedDist);
                 
-                for(;  xMath < xEndMath;  xMath += roundedDist)
-                {
+                for(;  xMath < xEndMath;  xMath += roundedDist) {
                     xWin = cSys.xToWin(xMath);
                     g.drawLine(xWin, start.y - scalerSize/2,
-                    xWin, start.y + scalerSize/2);
+                            xWin, start.y + scalerSize/2);
                     
                     g.drawString(cSys.format(xMath), xWin+x_xTextOff, start.y+x_yTextOff);
                     
@@ -182,8 +168,7 @@ public class Axis implements Serializable
                 
                 double yMath = cSys.yToMath(start.y);
                 double yEndMath = cSys.yToMath(end.y);
-                if(yMath > yEndMath)
-                {
+                if(yMath > yEndMath) {
                     tmp = yEndMath; yEndMath = yMath; yMath = tmp;
                 }
                 int yWin;
@@ -193,11 +178,10 @@ public class Axis implements Serializable
                 roundedDist = getRounded(roundedDist, roundedDist);
                 yMath = getRounded(yMath, roundedDist);
                 
-                for(;  yMath < yEndMath;  yMath += roundedDist)
-                {
+                for(;  yMath < yEndMath;  yMath += roundedDist) {
                     yWin = cSys.yToWin(yMath);
                     g.drawLine(start.x-scalerSize/2, yWin,
-                    start.x+scalerSize/2, yWin);
+                            start.x+scalerSize/2, yWin);
                     
                     g.drawString(cSys.format(yMath), start.x+y_xTextOff, yWin+y_yTextOff);
                 }
@@ -208,8 +192,7 @@ public class Axis implements Serializable
     /** This method sets the height(for x) resp. width(for y) of scalers
      * in pixels => the unit is "window coordinates"
      */
-    public void setScalerSize(int pixels)
-    {
+    public void setScalerSize(int pixels) {
         scalerSize = pixels;
     }
 }

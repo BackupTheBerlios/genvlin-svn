@@ -1,7 +1,5 @@
 package numbercruncher.mathutils;
 
-import java.util.Hashtable;
-
 /**
  * The base class for functions that can have derivatives.
  * Initialize the static function table with some sample functions.

@@ -75,4 +75,8 @@ public interface CollectionInterface extends IDData {
     /** This method removes the specified entry. */
     public boolean remove(int index);
     
+    /**
+     * This method will fire a global update change event to all the listeners.
+     */
+    public void update();
 }

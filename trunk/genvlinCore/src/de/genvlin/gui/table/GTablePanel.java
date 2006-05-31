@@ -121,7 +121,7 @@ public class GTablePanel implements ClipboardOwner {
     
     /** This variable is necessary so that the user can specify how many cols and rows */
     //private JTextField newSizeColumn;
-        
+    
     //--------- UNDO -------------
     transient Clipboard clip;//transient so we do not save in project
     
@@ -137,7 +137,6 @@ public class GTablePanel implements ClipboardOwner {
     
     public GTablePanel(VectorPool pool) {
         GTableModel model = new GTableModel(pool);
-        //model.set(pool);
         table = new GTable(model);
         initTable();
     }
@@ -277,7 +276,7 @@ public class GTablePanel implements ClipboardOwner {
                         setSelected(s);
                     } catch (Exception exc) {
                         Log.err("\nWhile pasting:", false);
-                        Log.err(exc, false);
+                        Log.err(exc.getCause(), false);
                     }
                 }
             }
@@ -501,6 +500,8 @@ public class GTablePanel implements ClipboardOwner {
         public void gMouseClicked(MouseEvent me) {
             Component comp = me.getComponent();
             try {
+                //a click should update cells! but update will remove selection !? getModel().update();                
+
                 //the next line causes an exception if !comp instanceof JTableHeader
                 int col = ((JTableHeader)comp).columnAtPoint(me.getPoint());
                 table.getSelectedRowCount();

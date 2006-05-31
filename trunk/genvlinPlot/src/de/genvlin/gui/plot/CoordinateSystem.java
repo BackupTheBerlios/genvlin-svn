@@ -26,15 +26,14 @@ public class CoordinateSystem implements Serializable {
      */
     private double xScale, yScale;
     
-    /** now we need an offset, the origin will plotted relative to the
-     * right-down window point
+    /** now we need a math-offset, the origin will plotted relative to the
+     * right-bottom window point. (Warning: Axis.x/yOffset is the window offset!)
      */
     private double xOff, yOff;
     
     
     private Color colorBackground;
     private Color color;
-    
     
     private Axis xAxis, yAxis;
     
@@ -69,7 +68,7 @@ public class CoordinateSystem implements Serializable {
         xAxis = new Axis(Axis.X, 10, this);
         yAxis = new Axis(Axis.Y, 5, this);
     }
-    
+   
     /** This method sets the Locale (=> numberFormat) for the coordinate
      * system. Important for displaying numbers etc.
      */
@@ -83,6 +82,22 @@ public class CoordinateSystem implements Serializable {
      */
     public void setWinBounds(Rectangle wBounds) {
         winBounds = wBounds;
+    }
+    
+    public Axis getYAxis() {
+        return yAxis;
+    }
+    
+    public Axis getXAxis() {
+        return xAxis;
+    }    
+    
+    public void setXAxis(Axis xAxis) {
+        this.xAxis = xAxis;
+    }
+
+    public void setYAxis(Axis yAxis) {
+        this.yAxis = yAxis;
     }
     
     public double getXScale() {
@@ -136,10 +151,10 @@ public class CoordinateSystem implements Serializable {
     public boolean contains(double x, double y) {
         double x1,y1,x2,y2,tmp;
         
-        x1=xToMath(0+Axis.getXOffset());
-        x2=xToMath(winWidth()-Axis.getXOffset());
-        y1=yToMath(0+Axis.getYOffset());
-        y2=yToMath(winHeight()-Axis.getYOffset());
+        x1=xToMath(0+Axis.xOffset);
+        x2=xToMath(winWidth()-Axis.xOffset);
+        y1=yToMath(0+Axis.yOffset);
+        y2=yToMath(winHeight()-Axis.yOffset);
         //if the bounds wont be in the correct order
         if(x2<x1) { tmp=x1; x1=x2; x2=tmp;}
         if(y2<y1) { tmp=y1; y1=y2; y2=tmp;}
@@ -187,8 +202,8 @@ public class CoordinateSystem implements Serializable {
         else yScale=(winHeight()-150)/(yMax-yMin);
         
         //translate the origin
-        xOff=-xMin*xScale+Axis.getXOffset()+5;
-        yOff=-yMin*yScale+Axis.getYOffset()+5;
+        xOff=-xMin*xScale+Axis.xOffset+5;
+        yOff=-yMin*yScale+Axis.yOffset+5;
         
         /*todo:scaler.automaticScale();
          * to determine how many scalers we need (on y axis):
@@ -243,7 +258,6 @@ public class CoordinateSystem implements Serializable {
         //todo: this is not font independent
         g.drawString("x = "+format(xToMath(p.x), superPrec), 0,10);
         g.drawString("y = "+format(yToMath(p.y), superPrec), 0,30);
-        
     }
     
     /** This method draws the distance between two points.

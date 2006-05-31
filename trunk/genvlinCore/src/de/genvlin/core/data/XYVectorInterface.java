@@ -24,7 +24,6 @@
 
 package de.genvlin.core.data;
 
-import java.awt.geom.Point2D;
 import java.util.Iterator;
 
 /**

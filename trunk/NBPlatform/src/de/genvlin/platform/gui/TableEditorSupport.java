@@ -28,7 +28,6 @@ import java.io.IOException;
 import org.openide.cookies.CloseCookie;
 import org.openide.cookies.EditCookie;
 import org.openide.cookies.EditorCookie;//now we need Text API
-import org.openide.cookies.OpenCookie;
 import org.openide.cookies.PrintCookie;
 import org.openide.cookies.ViewCookie;
 import org.openide.filesystems.FileLock;

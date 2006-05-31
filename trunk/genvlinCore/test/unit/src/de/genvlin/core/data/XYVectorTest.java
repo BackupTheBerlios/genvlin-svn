@@ -87,17 +87,17 @@ public class XYVectorTest extends TestCase
                     assertEquals(xNum.doubleValue(), 
                             resultX.doubleValue(),1e-10);
                 else if(resultX instanceof Float)
-                    assertEquals(((Float)xNum).floatValue(), 
-                            ((Float)resultX).floatValue(),1e-10);
+                    assertEquals(((Number)xNum).floatValue(), 
+                            ((Number)resultX).floatValue(),1e-10);
                 else
                     assertEquals(xNum, resultX);
                 
                 if(resultY instanceof Double)
-                    assertEquals(((Double)yNum).doubleValue(), 
-                            ((Double)resultY).doubleValue(),1e-10);
+                    assertEquals(((Number)yNum).doubleValue(), 
+                            ((Number)resultY).doubleValue(),1e-10);
                 else if(resultY instanceof Float)
-                    assertEquals(((Float)yNum).floatValue(), 
-                            ((Float)resultY).floatValue(),1e-10);
+                    assertEquals(((Number)yNum).floatValue(), 
+                            ((Number)resultY).floatValue(),1e-10);
                 else
                     assertEquals(yNum, resultY);
                 */

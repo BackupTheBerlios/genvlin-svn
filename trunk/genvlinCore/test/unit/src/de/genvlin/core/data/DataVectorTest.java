@@ -12,6 +12,7 @@ import junit.framework.*;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 /**
  *
@@ -139,10 +140,10 @@ public class DataVectorTest extends TestCase {
         mySetUp();
         assertTrue(10 == dv.size());
         dv.clear();
-        assertTrue(0 == dv.size());        
+        assertTrue(0 == dv.size());
     }
     
-     /**
+    /**
      * Test of clear method, of class de.genvlin.core.data.DataVector.
      */
     public void testEquals() {
@@ -150,7 +151,7 @@ public class DataVectorTest extends TestCase {
         mySetUp();
         assertTrue(10 == dv.size());
         dv.clear();
-        assertTrue(0 == dv.size());        
+        assertTrue(0 == dv.size());
     }
     
     /**
@@ -172,5 +173,67 @@ public class DataVectorTest extends TestCase {
         
         assertEquals(32.3d, dv.getDouble(2), 1e-10);
         dv.clear();
-    }    
+    }
+    
+    /**
+     * Test of remove method, of class de.genvlin.core.data.DataVector.
+     */
+    public void testRemove() {
+        System.out.println("remove");
+        
+        mySetUp();        
+        
+        boolean expResult = true;
+        boolean result = dv.remove(5);
+        assertEquals(expResult, result);
+        
+        dv.clear();
+    }
+    
+    /**
+     * Test of set method, of class de.genvlin.core.data.DataVector.
+     */
+    public void testSet() {
+        System.out.println("set");
+        
+        mySetUp();
+        Number expResult = new Integer(6);
+        Number result = dv.set(6, new Integer(12));
+        assertEquals(expResult, result);        
+        dv.clear();
+    }
+    
+    /**
+     * Test of trimToSize method, of class de.genvlin.core.data.DataVector.
+     */
+    public void testTrimToSize() {
+        System.out.println("trimToSize");
+        
+        for(int i=0; i<25; i++)
+            dv.addDouble(i);
+        
+        int start;
+        Random rand = new Random(125245612);
+        
+        for(int i=0; i<10; i++) {
+            start = dv.size() + rand.nextInt(20)-10;
+            dv.trimToSize(start);
+            for(int n=0; n<dv.size(); n++) {
+                try {
+                    dv.set(n, new Double(23));
+                }catch(Exception e) {
+                    e.printStackTrace();
+                    assertTrue(false);
+                }
+            }
+            for(int n=dv.size(); n<dv.size()+10; n++) {
+                try {
+                    dv.set(n, new Double(23));
+                    assertTrue(false);
+                }catch(Exception e) {
+                }
+            }
+        }
+        dv.clear();
+    }
 }

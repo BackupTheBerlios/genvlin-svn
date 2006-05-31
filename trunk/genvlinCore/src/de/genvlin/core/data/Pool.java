@@ -82,7 +82,8 @@ class Pool extends AbstractCollection
     protected IDData add(IDData data){
         if(getColl().containsKey(data.getID()))
             return data;
-        IDData tmp = (IDData)getColl().put(data.getID(), data);
+        //IDData tmp = (IDData)
+                getColl().put(data.getID(), data);
         
         fireEvent(AbstractCollection.ADD_DATA, data.getID());
         return null;

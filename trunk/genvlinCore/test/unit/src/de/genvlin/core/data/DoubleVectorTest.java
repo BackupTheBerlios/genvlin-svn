@@ -7,10 +7,10 @@
 
 package de.genvlin.core.data;
 
+import de.genvlin.core.plugin.Log;
 import java.util.ArrayList;
 import junit.framework.*;
 import java.util.Collection;
-import java.util.Arrays;
 
 /**
  *
@@ -24,9 +24,17 @@ public class DoubleVectorTest extends TestCase {
         super(testName);
     }
     
+    public void mySetUp() {
+        try {
+            for(int i=0; i<10; i++) dv.addDouble(i);
+        } catch(Exception e) {
+            Log.err("\nClear-exception while calling setUp():", false);
+            Log.err(e, false);
+        }
+    }    
+    
     protected void setUp() throws Exception {
         dv = (DoubleVector)MainPool.getDefault().create(DoubleVectorInterface.class);
-        
     }
     
     protected void tearDown() throws Exception {
@@ -98,7 +106,7 @@ public class DoubleVectorTest extends TestCase {
         assertTrue(0 == dv.size());
         dv.addDouble(value);
         assertTrue(1 == dv.size());
-        
+        dv.clear();
     }
     
     /**
@@ -143,6 +151,7 @@ public class DoubleVectorTest extends TestCase {
         dv.addAll(test);
         
         assertEquals(32.3d, dv.getDouble(2), 1e-10);
+        dv.clear();
     }
     
     /**
@@ -168,7 +177,8 @@ public class DoubleVectorTest extends TestCase {
         
         int expResult = 100;
         int result = dv.size();
-        assertEquals(expResult, result);        
+        assertEquals(expResult, result);
+        dv.clear();
     }
     
     /**
@@ -183,7 +193,7 @@ public class DoubleVectorTest extends TestCase {
         Number result = dv.get(0);
         assertEquals(expResult, result);
         
-        dv.clear();        
+        dv.clear();
     }
     
     /**
@@ -206,5 +216,83 @@ public class DoubleVectorTest extends TestCase {
      */
     public void testAdd() {
         System.out.println("add: see testClearAndAdd");
+    }
+    
+    /**
+     * Test of remove method, of class de.genvlin.core.data.DoubleVector.
+     */
+    public void testRemove() {
+        System.out.println("remove");
+        
+        /*for(int i=0; i<34; i++)
+            dv.addDouble(i);
+         
+        boolean expResult = true;
+        boolean result = dv.remove(23);
+        assertEquals(expResult, result);
+         
+        dv.clear();*/
+    }
+    
+    /**
+     * Test of set method, of class de.genvlin.core.data.DoubleVector.
+     */
+    public void testSet() {
+        System.out.println("set");
+        
+        for(int i=0; i<34; i++)
+            dv.add(new Double(i));
+        
+        int ind = 23;
+        Number expResult = new Double(ind);
+        Number setted = new Double(2345);
+        Number result = dv.set(ind, setted);
+        assertEquals(expResult, result);
+        assertEquals(setted, dv.get(ind));
+        
+        dv.clear();
+    }
+    
+    /**
+     * Test of iterator method, of class de.genvlin.core.data.DoubleVector.
+     */
+    public void testIterator() {
+        System.out.println("iterator");
+        
+        /*Iterator result = instance.iterator();
+        assertEquals(expResult, result);
+         */
+    }
+    
+    /**
+     * Test of trimToSize method, of class de.genvlin.core.data.DoubleVector.
+     */
+    public void testTrimToSize() {
+        System.out.println("trimToSize");
+        
+        for(int i=0; i<25; i++)
+            dv.addDouble(i);
+        
+        int start;
+        for(int i=0; i<20; i++) {
+            start = dv.getRawArray().length - i;
+            dv.trimToSize(start);
+            for(int n=0; n<dv.size(); n++) {
+                try {
+                    dv.set(n, new Double(23));
+                }catch(Exception e) {
+                    e.printStackTrace();
+                    assertTrue(false);
+                }
+            }
+            for(int n=dv.size(); n<dv.size()+10; n++) {
+                try {
+                    dv.set(n, new Double(23));
+                    assertTrue(false);
+                }catch(Exception e) {
+                }
+            }
+        }
+        dv.clear();
     }
 }

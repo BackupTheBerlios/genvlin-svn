@@ -1,6 +1,5 @@
 package numbercruncher.matrix;
 
-import java.util.Random;
 
 import numbercruncher.mathutils.Epsilon;
 import numbercruncher.mathutils.AlignRight;

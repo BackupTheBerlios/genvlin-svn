@@ -28,8 +28,6 @@ import de.genvlin.core.data.MainPool;
 import de.genvlin.core.data.PoolInterface;
 import de.genvlin.core.plugin.LogPlugin;
 import de.genvlin.core.plugin.Platform;
-import de.genvlin.core.plugin.PluginPool;
-import de.genvlin.core.plugin.PluginSPI;
 import de.genvlin.core.plugin.RequestEvent;
 import de.genvlin.platform.plot.PlotTopComponent;
 import java.awt.Component;

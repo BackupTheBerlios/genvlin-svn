@@ -35,13 +35,11 @@ import de.genvlin.core.plugin.PluginPool;
 import de.genvlin.core.plugin.Log;
 import de.genvlin.core.plugin.RequestEvent;
 import de.genvlin.gui.table.GTablePanel;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import numbercruncher.mathutils.DataPoint;
 import numbercruncher.mathutils.RegressionLine;
 
 /**

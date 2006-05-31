@@ -100,7 +100,7 @@ class DoubleVector extends AbstractCollection
      *
      * @param value double to add to the vector
      */
-    public final void addDouble(double value) {
+    public final boolean addDouble(double value) {
         
         if ((firstFreeIndex + 1) >= dArray.length) {
             double[] newMap = new double[dArray.length + increaseSize];
@@ -115,6 +115,7 @@ class DoubleVector extends AbstractCollection
         
         ////TODO expensive:
         //fireEvent(AbstractCollection.ADD_DATA);
+        return true;
     }
     
     /** This method insert specified value at specified index.
@@ -222,7 +223,7 @@ class DoubleVector extends AbstractCollection
     public final boolean add(Number n) {
         try {
             addDouble(n.doubleValue());
-            //TODO expensive:            
+            //TODO expensive:
             //fireEvent(AbstractCollection.ADD_DATA);
             return true;
         } catch(Exception e) {
@@ -260,5 +261,18 @@ class DoubleVector extends AbstractCollection
     
     public Iterator iterator() {
         throw new UnsupportedOperationException("Not yet implemented!");
+    }
+    
+    public void trimToSize(int size) {
+        if(size>=0) {
+            if(size > dArray.length) {
+                double[] newMap = new double[size+increaseSize];
+                System.arraycopy(dArray, 0, newMap, 0, firstFreeIndex);
+                firstFreeIndex = size;
+                dArray = newMap;
+            } else if(size > firstFreeIndex && size < dArray.length) {
+                firstFreeIndex = size;
+            }
+        }
     }
 }

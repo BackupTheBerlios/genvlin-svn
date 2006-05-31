@@ -1,8 +1,5 @@
 package numbercruncher.mathutils;
 
-import com.sun.rsasign.a0;
-import com.sun.rsasign.a1;
-
 /**
  * A least-squares regression line function.<br>
  * y = m*x + n<br>

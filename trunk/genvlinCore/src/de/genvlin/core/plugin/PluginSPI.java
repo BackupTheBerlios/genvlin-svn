@@ -24,10 +24,6 @@
 
 package de.genvlin.core.plugin;
 
-import de.genvlin.core.data.MainPool;
-import java.awt.event.MouseEvent;
-import javax.swing.JPopupMenu;
-
 /** Service Provider Interface (SPI) for the plugins in genvlin.
  * E.g. the JFreechart library offers the "plot" service for genvlin.
  * The SPI <b>forces</b> the plugins to provide these methods!

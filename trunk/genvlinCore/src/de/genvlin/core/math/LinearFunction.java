@@ -151,6 +151,6 @@ public class LinearFunction extends AbstractCollection
     }
     
     public String toString() {
-        return "Linear Function:  y = " + getM() + "x + (" + getN()+")";
+        return "Linear Function:("+getID()+") y = " + getM() + "x + (" + getN()+")";
     }
 }

@@ -22,6 +22,7 @@
 package de.genvlin.core.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -77,7 +78,7 @@ class DataVector extends AbstractCollection
     public boolean addAll(Collection coll) {
         int tmp = size();
         if(getAL().addAll(coll)) {
-            fireEvent(AbstractCollection.ADD_SOME, tmp, size());            
+            fireEvent(AbstractCollection.ADD_SOME, tmp, size());
             return true;
         } else
             return false;
@@ -90,7 +91,13 @@ class DataVector extends AbstractCollection
     public boolean add(Number n) {
         return getAL().add(n);
         //TODO expensive:
-        //fireEvent(AbstractCollection.ADD_DATA, size(), size());        
+        //fireEvent(AbstractCollection.ADD_DATA, size(), size());
+    }
+    
+    public boolean addDouble(double d) {
+        return getAL().add(new Double(d));
+        //TODO expensive:
+        //fireEvent(AbstractCollection.ADD_DATA, size(), size());
     }
     
     public Number get(int i) {
@@ -100,6 +107,15 @@ class DataVector extends AbstractCollection
     public Number set(int i, Number n) {
         return (Number)getAL().set(i,n);
         //TODO expensive:
-        //fireEvent(AbstractCollection.ADD_DATA, i,i);        
+        //fireEvent(AbstractCollection.ADD_DATA, i,i);
+    }
+    
+    public void trimToSize(int size) {
+        if(this.size()<size) {
+            //getAL().ensureCapacity(size);
+            getAL().addAll(                    
+                    Arrays.asList(new Object[size - this.size()]));
+            //getAL().trimToSize();
+        }
     }
 }

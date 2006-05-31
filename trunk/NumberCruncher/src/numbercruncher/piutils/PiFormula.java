@@ -1,6 +1,5 @@
 package numbercruncher.piutils;
 
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

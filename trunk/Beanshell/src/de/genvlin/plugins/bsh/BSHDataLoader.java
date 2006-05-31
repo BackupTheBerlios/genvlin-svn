@@ -30,7 +30,7 @@ public class BSHDataLoader extends UniFileLoader {
     protected void initialize() {
         super.initialize();        
         //TODO NOW Plugin init HACK:
-        PluginPool.getDefault().add(BSHUtil.getDefault());        
+        PluginPool.getDefault().add(BSHScriptPlugin.getDefault());        
         getExtensions().addMimeType(BSH_MIME);
     }
     

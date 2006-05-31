@@ -26,7 +26,6 @@ package de.genvlin.core.plugin;
 
 import de.genvlin.core.data.ID;
 import de.genvlin.core.data.XYPool;
-import de.genvlin.core.math.Function;
 
 /**
  * This interface defines methods which should be implemented from

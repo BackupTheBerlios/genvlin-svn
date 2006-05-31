@@ -35,6 +35,9 @@ public interface VectorInterface extends CollectionInterface {
     /** This method adds a Number to the vector */
     public boolean add(Number o);
     
+    /** This method adds a double to the vector */
+    public boolean addDouble(double d);
+    
     /** This method appends a {@link Collection} to this
      * vector.<p>
      * It returns true if successfully added, false otherwise.
@@ -54,4 +57,11 @@ public interface VectorInterface extends CollectionInterface {
     /** TODO This method inserts a number before the i-th element.
      * It returns wether insertation was successful.*/
     //abstract public boolean insert(int i, Number n);
+    
+    /**
+     * This method ensure that the set method will not fire NullPointer
+     * Exceptions until the new size.
+     * @param size the new size of the VectorInterface's implementation.
+     */
+    public void trimToSize(int size);
 }

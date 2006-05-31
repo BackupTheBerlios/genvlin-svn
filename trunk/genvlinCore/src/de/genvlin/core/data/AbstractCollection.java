@@ -37,37 +37,47 @@ public abstract class AbstractCollection
     private ID id;
     private HashSet listeners;
     
-    /** 
+    /**
      * This variable indicates that exactly one data entry was
      * removed.
      */
     static final public String REMOVE_DATA = "Remove Data";
     
-    /** 
+    /**
      * This variable indicates that exactly one data entry was
      * added.
      */
     static final public String ADD_DATA = "Add Data";
     
-    /** 
+    /**
      * This variable indicates that more than one data entry was
      * added.
-     */    
+     */
     static final public String ADD_SOME = "Add Some";
     
-    /** 
+    /**
      * This variable indicates that more than one data entry was
      * removed.
-     */    
+     */
     static final public String REMOVE_SOME = "Remove Some";
     
-    /** 
+    /**
      * This variable indicates that the "decoration" (title,
      * info, etc.) of this vector was changed.
-     */    
+     */
     static final public String CHANGE_DECORATION = "Change Decoration";
     
-   
+    /**
+     * This variable indicates that more than one data entry
+     * was changed.     
+     */
+    static final public String CHANGE_SOME = "Change Soem";    
+    
+    /**
+     * This variable indicates that one data entry was changed.     
+     */
+    static final public String CHANGE_DATA = "Change Data";    
+    
     public AbstractCollection(ID id) {
         setID(id);
     }
@@ -133,7 +143,11 @@ public abstract class AbstractCollection
         Iterator iter = pcl.iterator();
         while(iter.hasNext()) {
             ((CollectionListener)iter.next()).vectorChanged(evt);
-        }        
+        }
+    }
+    
+    public void update() {
+        fireEvent(CHANGE_SOME, getID());
     }
     
     /**

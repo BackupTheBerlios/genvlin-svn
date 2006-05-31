@@ -24,7 +24,6 @@
 
 package de.genvlin.core.plugin;
 
-import de.genvlin.core.data.ID;
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import javax.swing.JPopupMenu;
@@ -94,7 +93,7 @@ public class Platform {
         public MouseEvent getMouseEvent();
     }          
     
-    static private SPI spi;
+    //static private SPI spi;
     
     /** This method sets the platform of genvlin-core.
      * Netbeans is the only one, which is currently available.<br>

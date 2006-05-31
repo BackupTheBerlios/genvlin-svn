@@ -51,7 +51,7 @@ public class GenvlinPlotPluginImpl implements
     private String context[] = {PluginPool.TABLE, PluginPool.HEADER, PluginPool.SELECTED_COLS};
     private VectorInterface[] selected;
     
-    public String getName() {
+    public String getName() {        
         return "Genvlin Plotter";
     }
     

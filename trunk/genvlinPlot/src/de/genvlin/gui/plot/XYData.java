@@ -108,12 +108,12 @@ public class XYData extends AbstractCollection
      for(int i = 0; i < Math.min(x.size(), y.size()); i++) {
      try {
      if(createNew) {
-     tmp = new Double(((Double)y.get(i)).doubleValue());//if exc. occur-> we dont add this and x!
-     xData.add(new Double(((Double)x.get(i)).doubleValue()));
+     tmp = new Double(((Number)y.get(i)).doubleValue());//if exc. occur-> we dont add this and x!
+     xData.add(new Double(((Number)x.get(i)).doubleValue()));
      yData.add(tmp);
      } else {
-     tmp = (Double)y.get(i);//if cast exc occur-> we dont add this and x!
-     yData.add((Double)x.get(i));
+     tmp = (Number)y.get(i);//if cast exc occur-> we dont add this and x!
+     yData.add((Number)x.get(i));
      yData.add(tmp);
      }
      } catch(Exception exc) {
@@ -125,8 +125,8 @@ public class XYData extends AbstractCollection
      if(false) {
      
      for(int i = 0; i < Math.min(xData.size(), yData.size()); i++) {
-     Log.log("x "+((Double)xData.get(i)).doubleValue(), false);
-     Log.log(" ;y "+((Double)yData.get(i)).doubleValue(), false);
+     Log.log("x "+((Number)xData.get(i)).doubleValue(), false);
+     Log.log(" ;y "+((Number)yData.get(i)).doubleValue(), false);
      }
      }
      
@@ -145,12 +145,12 @@ public class XYData extends AbstractCollection
         for(int i = 0; i < Math.min(x.size(), y.size()); i++) {
             try {
                 if(true) {
-                    tmp = new Double(((Double)y.get(i)).doubleValue());//if exc. occur-> we dont add this and x!
-                    x.add(new Double(((Double)x.get(i)).doubleValue()));
+                    tmp = new Double(((Number)y.get(i)).doubleValue());//if exc. occur-> we dont add this and x!
+                    x.add(new Double(((Number)x.get(i)).doubleValue()));
                     yData.add(tmp);
                 } else {
-                    tmp = (Double)y.get(i);//if cast exc occur-> we dont add this and x!
-                    yData.add((Double)x.get(i));
+                    tmp = (Number)y.get(i);//if cast exc occur-> we dont add this and x!
+                    yData.add((Number)x.get(i));
                     yData.add(tmp);
                 }
             } catch(Exception exc) {
@@ -162,8 +162,8 @@ public class XYData extends AbstractCollection
         /*if(false) {
          
             for(int i = 0; i < Math.min(xData.size(), yData.size()); i++) {
-                Log.log("x "+((Double)xData.get(i)).doubleValue(), false);
-                Log.log(" ;y "+((Double)yData.get(i)).doubleValue(), false);
+                Log.log("x "+((Number)xData.get(i)).doubleValue(), false);
+                Log.log(" ;y "+((Number)yData.get(i)).doubleValue(), false);
             }
         }*/
         
@@ -209,7 +209,7 @@ public class XYData extends AbstractCollection
      * sys. contains the point.
      */
     public void draw(Graphics g, CoordinateSystem coordSys) {
-        int x, y;
+        int x=0, y=0;
         double tmpx, tmpy;
         int oldX=0, oldY=0;
         boolean printLine = false;
@@ -218,20 +218,16 @@ public class XYData extends AbstractCollection
             g.setColor(color);
             
             try {
-                tmpx = ((Double)xyVector.getX(i)).doubleValue();
-                tmpy = ((Double)xyVector.getY(i)).doubleValue();
+                tmpx = ((Number)xyVector.getX(i)).doubleValue();
+                tmpy = ((Number)xyVector.getY(i)).doubleValue();
             }catch(Exception e) {
                 printLine = false;
                 continue;
             }
-            if(coordSys.contains(tmpx, tmpy)) {
-                x = coordSys.xToWin(tmpx);
-                y = coordSys.yToWin(tmpy);
-            } else {
-                printLine = false;
-                continue;
-            }
             
+            x = coordSys.xToWin(tmpx);
+            y = coordSys.yToWin(tmpy);
+
             if(printLine && i!=0) {
                 g.drawLine(oldX, oldY, x, y);
             } else {
@@ -239,6 +235,8 @@ public class XYData extends AbstractCollection
             }
             //always initialise the old values with the last ones to plot a line
             oldX = x;    oldY = y;
+            
+            if(!coordSys.contains(tmpx, tmpy)) continue;
             
             switch(type) {
                 case DOT:
