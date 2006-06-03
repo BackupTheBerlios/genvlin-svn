@@ -152,4 +152,9 @@ public class XYVectorPool_Graph2DModelWrapper extends AbstractGraphModel
     public int indexOf(Comparable id) {
         return pool.indexOf(id);
     }
+
+    public void update()
+    {
+        pool.update();
+    }
 }

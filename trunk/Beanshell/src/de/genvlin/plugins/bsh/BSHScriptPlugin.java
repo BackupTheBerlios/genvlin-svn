@@ -1,5 +1,5 @@
 /*
- * BSHUtil.java
+ * BSHScriptPlugin.java
  *
  * Created on 26. April 2006, 23:56
  *
@@ -27,8 +27,6 @@ package de.genvlin.plugins.bsh;
 import bsh.EvalError;
 import bsh.Interpreter;
 import de.genvlin.core.plugin.Log;
-import de.genvlin.core.plugin.PluginPool;
-import de.genvlin.core.plugin.PluginSPI;
 import de.genvlin.core.plugin.RequestEvent;
 import de.genvlin.core.plugin.ScriptPlugin;
 import java.io.FileNotFoundException;
@@ -38,13 +36,15 @@ import java.io.IOException;
  *
  * @author Peter Karich
  */
-public class BSHUtil implements ScriptPlugin {
+public class BSHScriptPlugin implements ScriptPlugin {
     
     Interpreter interpreter;
-    static BSHUtil util;
+    static BSHScriptPlugin util;
     
-    /** Creates a new instance of BSHUtil */
-    private BSHUtil() {
+    /**
+     * Creates a new instance of BSHScriptPlugin
+     */
+    private BSHScriptPlugin() {
     }
     
     private Interpreter getInterpreter() {
@@ -62,13 +62,13 @@ public class BSHUtil implements ScriptPlugin {
         return interpreter;
     }
     
-    public static synchronized BSHUtil getDefault() {
+    public static synchronized BSHScriptPlugin getDefault() {
         if(util == null)
-            util = new BSHUtil();
+            util = new BSHScriptPlugin();
         return util;
     }
     
-    private boolean init = false;
+    //private boolean init = false;
     
     public void init() {
         /*if(!init) {
@@ -81,20 +81,26 @@ public class BSHUtil implements ScriptPlugin {
         try {
             getInterpreter().eval(str);
         } catch (EvalError ex) {
-            Log.log(ex.getMessage(), true);
+            Log.err("Error in line no:"+ex.getErrorLineNumber(), true);
+            Log.err(ex, true);
         }
     }
     
-    public void evalSource(String fileName) {
-        try {
-            getInterpreter().source(fileName);
-        } catch (FileNotFoundException ex) {
-            Log.err(ex.getMessage(), true);
-        } catch (IOException ex) {
-            Log.err(ex.getMessage(), true);
-        } catch (EvalError ex) {
-            Log.err(ex.getMessage(), true);
-        }
+    public void evalSource(final String fileName) {
+        new Thread(){
+            public void run(){
+                try {
+                    getInterpreter().source(fileName);
+                } catch (FileNotFoundException ex) {
+                    Log.err(ex, true);
+                } catch (IOException ex) {
+                    Log.err(ex, true);
+                } catch (EvalError ex) {
+                    Log.err("Error in line no:"+ex.getErrorLineNumber(), true);
+                    Log.err(ex, true);
+                }
+            }
+        }.start();        
     }
     
     final public static String name = "Beanshell interpreter";
